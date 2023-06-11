@@ -9,7 +9,7 @@ export const selectFromTable = async (tableName) => {
   return rows;
 };
 
-export const selectOneFromTable = async (tableName, condition) => {
+export const selectSpecificFromTable = async (tableName, condition) => {
   const query = `
       SELECT * 
       FROM ${tableName}

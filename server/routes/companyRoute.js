@@ -23,8 +23,22 @@ companyRouter.get('/company/:id', (req, res) => {
 // POST new company
 companyRouter.post('/company', (req, res) => {
   console.log(req.body);
-  console.log('added new company');
-  insertIntoTable();
+  const attributes = [
+    'company_code',
+    'company_name',
+    'company_telephone',
+    'company_email',
+    'company_address',
+  ];
+  const values = [
+    'C01-NR-03',
+    'newCompany',
+    '87000',
+    'mycompany@email.com',
+    'dyan lang st.',
+  ];
+
+  insertIntoTable('company', attributes, values);
   res.json({ message: 'POST new company' });
 });
 // UPDATE one company by id
