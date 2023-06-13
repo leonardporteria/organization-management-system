@@ -44,27 +44,29 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div className='Form'>
-      <div className='Form__Header'>
+    <>
+      <div className='Header'>
         <h1>
-          Join Our Socio-Civing Organization!
+          Join our Socio-Civing Organization!
           <br /> Fill up the form below
         </h1>
       </div>
 
-      <OrganizationInformation />
-      <PersonalInformation />
-      <EmployeeInformation />
-      <EducaitonInformation />
-      <LegalDependentInformation />
-      <ContactInformation />
-      <SponsorInformation />
+      <div className='Form'>
+        <OrganizationInformation />
+        <PersonalInformation />
+        <EmployeeInformation />
+        <EducaitonInformation />
+        <LegalDependentInformation />
+        <ContactInformation />
+        <SponsorInformation />
 
-      <div className='Form__button' onClick={handleSubmit}>
-        <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>
+        <div className='Form__button' onClick={handleSubmit}>
+          <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>
+        </div>
+        {response && <div>{JSON.stringify(response)}</div>}
       </div>
-      {response && <div>{JSON.stringify(response)}</div>}
-    </div>
+    </>
   );
 };
 

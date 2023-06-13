@@ -1,10 +1,20 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useMatch } from 'react-router-dom';
 
 import LandingPage from './components/landingPage/LandingPage';
 import ApplicationForm from './components/applicationForm/ApplicationForm';
-import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import LoginPage from './components/loginPage/LoginPage';
 
 import './App.scss';
+
+const NavLink = ({ to, label }) => {
+  const match = useMatch(to);
+
+  return (
+    <Link to={to} className={match ? 'active' : 'App__header__links'}>
+      {label}
+    </Link>
+  );
+};
 
 function App() {
   return (
@@ -14,16 +24,22 @@ function App() {
           <h1 className='App__header__title'>Organization Management System</h1>
 
           <div className='App__header__links'>
-            <Link to='/'>Landing Page</Link>
-            <Link to='/application'>Application</Link>
-            <Link to='/admin'>Admin</Link>
+            <NavLink to='/' label='Home'>
+              Home
+            </NavLink>
+            <NavLink to='/application' label='Application'>
+              Application
+            </NavLink>
+            <NavLink to='/login' label='Login'>
+              Login
+            </NavLink>
           </div>
         </nav>
 
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/application' element={<ApplicationForm />} />
-          <Route path='/admin' element={<AdminDashboard />} />
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </div>
