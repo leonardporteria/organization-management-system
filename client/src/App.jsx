@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-import LandingPage from './components/LandingPage';
-import ApplicationForm from './components/ApplicationForm';
-import AdminDashboard from './components/AdminDashboard';
+import LandingPage from './components/landingPage/LandingPage';
+import ApplicationForm from './components/applicationForm/ApplicationForm';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
 
 function App() {
   return (
