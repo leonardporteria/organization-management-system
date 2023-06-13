@@ -30,13 +30,7 @@ companyRouter.post('/company', (req, res) => {
     'company_email',
     'company_address',
   ];
-  const values = [
-    'C01-NR-03',
-    'newCompany',
-    '87000',
-    'mycompany@email.com',
-    'dyan lang st.',
-  ];
+  const values = Object.values(req.body);
 
   insertIntoTable('company', attributes, values);
   res.json({ message: 'POST new company' });

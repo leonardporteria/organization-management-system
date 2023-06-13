@@ -4,16 +4,16 @@ import LandingPage from './components/landingPage/LandingPage';
 import ApplicationForm from './components/applicationForm/ApplicationForm';
 import AdminDashboard from './components/adminDashboard/AdminDashboard';
 
+import './App.scss';
+
 function App() {
   return (
-    <div className='min-w-full min-h-screen bg-neutral-950 text-neutral-50 flex flex-col items-center'>
+    <div className='App'>
       <BrowserRouter>
-        <nav className='flex flex-col bg-neutral-800 p-4 w-full'>
-          <h1 className='text-3xl font-extrabold text-center'>
-            Organization Management System
-          </h1>
+        <nav className='App__header'>
+          <h1 className='App__header__title'>Organization Management System</h1>
 
-          <div className='flex justify-evenly p-4'>
+          <div className='App__header__links'>
             <Link to='/'>Landing Page</Link>
             <Link to='/application'>Application</Link>
             <Link to='/admin'>Admin</Link>

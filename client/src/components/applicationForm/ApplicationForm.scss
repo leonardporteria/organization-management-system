@@ -1,0 +1,13 @@
+.Form__button {
+  cursor: pointer;
+  width: 10rem;
+  height: 2rem;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__submit {
+    color: white;
+    font-size: 0.75rem;
+  }
+}

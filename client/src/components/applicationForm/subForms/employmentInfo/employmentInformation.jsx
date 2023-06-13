@@ -1,40 +1,37 @@
 const EmployeeInformation = () => {
   return (
-    <div className='flex flex-col justify-center items-center w-full'>
+    <div className='Form__Employment'>
       {/* EMPLOYMENT DETAILS */}
-      <div className='w-full px-8'>
-        <h1 className='text-2xl font-bold text-center p-4'>
-          EMPLOYMENT INFORMATION
-        </h1>
 
-        <div className='flex justify-between gap-4 '>
-          <label className='flex flex-col w-full'>
-            Name of Office:
-            <input type='text' className='bg-neutral-900 p-2' />
-          </label>
-          <label className='flex flex-col w-full'>
-            Title and Position:
-            <input type='text' className='bg-neutral-900 p-2' />
-          </label>
-        </div>
+      <h1>EMPLOYMENT INFORMATION</h1>
 
-        <div className='flex justify-between gap-4 '>
-          <label className='flex flex-col w-full'>
-            Workplace Telephone Number:
-            <input type='text' className='bg-neutral-900 p-2' />
-          </label>
-          <label className='flex flex-col w-full'>
-            Workplace Email:
-            <input type='text' className='bg-neutral-900 p-2' />
-          </label>
-        </div>
+      <div>
+        <label>
+          Name of Office:
+          <input type='text' />
+        </label>
+        <label>
+          Title and Position:
+          <input type='text' />
+        </label>
+      </div>
 
-        <div className='flex justify-between gap-4 '>
-          <label className='flex flex-col w-full'>
-            Company Address:
-            <input type='text' className='bg-neutral-900 p-2' />
-          </label>
-        </div>
+      <div>
+        <label>
+          Workplace Telephone Number:
+          <input type='text' />
+        </label>
+        <label>
+          Workplace Email:
+          <input type='text' />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Company Address:
+          <input type='text' />
+        </label>
       </div>
     </div>
   );
