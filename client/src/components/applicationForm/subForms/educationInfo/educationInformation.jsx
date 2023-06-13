@@ -1,10 +1,12 @@
+import './educationInformation.scss';
+
 const EducaitonInformation = () => {
   return (
     <div className='Form__Education'>
       {/* EMPLOYMENT DETAILS */}
-      <h1>EDUCATION INFORMATION</h1>
+      <h1 className='Form__Education__title'>EDUCATION INFORMATION</h1>
 
-      <div>
+      <div className='Form__Education__container'>
         <h1>Elementary Education Attainment</h1>
         <label>
           <p>Name of School:</p>
@@ -20,7 +22,7 @@ const EducaitonInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Education__container'>
         <h1>Junior High School Education Attainment</h1>
         <label>
           <p>Name of School:</p>
@@ -36,7 +38,7 @@ const EducaitonInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Education__container'>
         <h1>Senior High School Education Attainment</h1>
         <label>
           <p>Name of School:</p>
@@ -52,7 +54,7 @@ const EducaitonInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Education__container'>
         <h1>College Education Attainment</h1>
         <label>
           <p>Name of School:</p>
@@ -68,7 +70,7 @@ const EducaitonInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Education__container'>
         <h1>Post Graduate Education Attainment</h1>
         <label>
           <p>Name of School:</p>
@@ -83,6 +85,8 @@ const EducaitonInformation = () => {
           <input type='text' />
         </label>
       </div>
+
+      <div className='Form__Education__line'></div>
     </div>
   );
 };

@@ -24,6 +24,8 @@ const OrganizationInformation = () => {
           <input type='text' />
         </label>
       </div>
+
+      <div className='Form__Organization__line'></div>
     </div>
   );
 };

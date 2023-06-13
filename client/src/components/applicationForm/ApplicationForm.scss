@@ -16,17 +16,20 @@
     }
   }
 
-  &button {
+  &__button {
+    justify-self: center;
     cursor: pointer;
-    width: 10rem;
-    height: 2rem;
-    background-color: green;
+    width: 20rem;
+    height: 4rem;
+    background-color: $green-800;
+    border: none;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    &__submit {
+    > h1 {
       color: white;
-      font-size: 0.75rem;
+      font-size: 1.5rem;
     }
   }
 }

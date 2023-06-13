@@ -61,7 +61,7 @@ const ApplicationForm = () => {
       <SponsorInformation />
 
       <div className='Form__button' onClick={handleSubmit}>
-        <h1 className='Form__button__submit'>Submit Application</h1>
+        <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>
       </div>
       {response && <div>{JSON.stringify(response)}</div>}
     </div>

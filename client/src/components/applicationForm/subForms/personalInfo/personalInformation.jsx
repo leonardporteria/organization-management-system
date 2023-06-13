@@ -4,9 +4,9 @@ const PersonalInformation = () => {
   return (
     <div className='Form__Personal'>
       {/* PERSONAL DETAILS */}
-      <h1>PERSONAL INFORMATION</h1>
+      <h1 className='Form__Personal__title'>PERSONAL INFORMATION</h1>
 
-      <div>
+      <div className='Form__Personal__details'>
         <label>
           <p>Last Name:</p>
           <input type='text' />
@@ -25,7 +25,7 @@ const PersonalInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Personal__details'>
         <label>
           <p>Place of Birth:</p>
           <input type='text' />
@@ -34,9 +34,6 @@ const PersonalInformation = () => {
           <p>Date of Birth:</p>
           <input type='date' />
         </label>
-      </div>
-
-      <div>
         <label>
           <p>Height in cm:</p>
           <input type='number' />
@@ -47,7 +44,7 @@ const PersonalInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Personal__details'>
         <label>
           <p>Nationality:</p>
           <input type='text' />
@@ -56,9 +53,6 @@ const PersonalInformation = () => {
           <p>Religion:</p>
           <input type='text' />
         </label>
-      </div>
-
-      <div>
         <label>
           <p>Blood Type:</p>
           <input type='text' />
@@ -70,8 +64,8 @@ const PersonalInformation = () => {
       </div>
 
       {/* CONTACT DETAILS */}
-      <h1>CONTACT INFORMATION</h1>
-      <div>
+      <h1 className='Form__Personal__title_c'>CONTACT INFORMATION</h1>
+      <div className='Form__Personal__contact'>
         <label>
           <p>House Number:</p>
           <input type='text' />
@@ -86,7 +80,7 @@ const PersonalInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Personal__contact'>
         <label>
           <p>City/Municipality:</p>
           <input type='text' />
@@ -101,7 +95,7 @@ const PersonalInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Personal__contact'>
         <label>
           <p>Cellphone Number:</p>
           <input type='text' />
@@ -115,6 +109,8 @@ const PersonalInformation = () => {
           <input type='text' />
         </label>
       </div>
+
+      <div className='Form__Personal__line'></div>
     </div>
   );
 };

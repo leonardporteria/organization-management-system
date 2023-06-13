@@ -1,10 +1,12 @@
+import './sponsorInformation.scss';
+
 const SponsorInformation = () => {
   return (
     <div className='Form__Sponsor'>
       {/* SPONSOR DETAILS */}
-      <h1>SPONSOR INFORMATION</h1>
+      <h1 className='Form__Sponsor__title'>SPONSOR INFORMATION</h1>
 
-      <div>
+      <div className='Form__Sponsor__container'>
         <label>
           <p>Sponsor Name:</p>
           <input type='text' />
@@ -14,6 +16,8 @@ const SponsorInformation = () => {
           <input type='text' />
         </label>
       </div>
+
+      <div className='Form__Sponsor__line'></div>
     </div>
   );
 };

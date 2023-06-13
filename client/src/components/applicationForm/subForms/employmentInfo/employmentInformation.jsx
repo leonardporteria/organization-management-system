@@ -1,11 +1,13 @@
+import './employmentInformation.scss';
+
 const EmployeeInformation = () => {
   return (
     <div className='Form__Employment'>
       {/* EMPLOYMENT DETAILS */}
 
-      <h1>EMPLOYMENT INFORMATION</h1>
+      <h1 className='Form__Employment__title'>EMPLOYMENT INFORMATION</h1>
 
-      <div>
+      <div className='Form__Employment__container'>
         <label>
           <p>Name of Office:</p>
           <input type='text' />
@@ -16,7 +18,7 @@ const EmployeeInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Employment__container'>
         <label>
           <p>Workplace Telephone Number:</p>
           <input type='text' />
@@ -27,12 +29,14 @@ const EmployeeInformation = () => {
         </label>
       </div>
 
-      <div>
+      <div className='Form__Employment__container'>
         <label>
           <p>Company Address:</p>
           <input type='text' />
         </label>
       </div>
+
+      <div className='Form__Employment__line'></div>
     </div>
   );
 };
