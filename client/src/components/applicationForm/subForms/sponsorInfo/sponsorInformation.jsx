@@ -6,11 +6,11 @@ const SponsorInformation = () => {
 
       <div>
         <label>
-          Sponsor Name:
+          <p>Sponsor Name:</p>
           <input type='text' />
         </label>
         <label>
-          Membership Number:
+          <p>Membership Number:</p>
           <input type='text' />
         </label>
       </div>

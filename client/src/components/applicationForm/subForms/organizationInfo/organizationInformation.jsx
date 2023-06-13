@@ -1,24 +1,26 @@
+import './organizationInformation.scss';
+
 const OrganizationInformation = () => {
   return (
-    <div className='Form_Organization'>
+    <div className='Form__Organization'>
       {/* ORGANIZATION DETAILS */}
-      <h1>ORGANIZATION INFORMATION</h1>
+      <h1 className='Form__Organization__title'>ORGANIZATION INFORMATION</h1>
 
-      <div>
+      <div className='Form__Organization__container'>
         <label>
-          Organization Region:
+          <p>Organization Region:</p>
           <input type='text' />
         </label>
         <label>
-          Club Name:
+          <p>Club Name:</p>
           <input type='text' />
         </label>
         <label>
-          Club President:
+          <p>Club President:</p>
           <input type='text' />
         </label>
         <label>
-          Date of Application:
+          <p>Date of Application:</p>
           <input type='text' />
         </label>
       </div>

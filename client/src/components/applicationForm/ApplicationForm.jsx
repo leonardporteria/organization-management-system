@@ -45,6 +45,13 @@ const ApplicationForm = () => {
 
   return (
     <div className='Form'>
+      <div className='Form__Header'>
+        <h1>
+          Join Our Socio-Civing Organization!
+          <br /> Fill up the form below
+        </h1>
+      </div>
+
       <OrganizationInformation />
       <PersonalInformation />
       <EmployeeInformation />

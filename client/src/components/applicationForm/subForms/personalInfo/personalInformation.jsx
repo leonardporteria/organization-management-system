@@ -1,68 +1,70 @@
+import './personalInformation.scss';
+
 const PersonalInformation = () => {
   return (
-    <div className='Form_Personal'>
+    <div className='Form__Personal'>
       {/* PERSONAL DETAILS */}
       <h1>PERSONAL INFORMATION</h1>
 
       <div>
         <label>
-          Last Name:
+          <p>Last Name:</p>
           <input type='text' />
         </label>
         <label>
-          First Name:
+          <p>First Name:</p>
           <input type='text' />
         </label>
         <label>
-          Middle Name:
+          <p>Middle Name:</p>
           <input type='text' />
         </label>
         <label>
-          Suffix:
+          <p>Suffix:</p>
           <input type='text' />
         </label>
       </div>
 
       <div>
         <label>
-          Place of Birth:
+          <p>Place of Birth:</p>
           <input type='text' />
         </label>
         <label>
-          Date of Birth:
+          <p>Date of Birth:</p>
           <input type='date' />
         </label>
       </div>
 
       <div>
         <label>
-          Height in cm:
+          <p>Height in cm:</p>
           <input type='number' />
         </label>
         <label>
-          Weight in kg:
+          <p>Weight in kg:</p>
           <input type='number' />
         </label>
       </div>
 
       <div>
         <label>
-          Nationality:
+          <p>Nationality:</p>
           <input type='text' />
         </label>
         <label>
-          Religion:
+          <p>Religion:</p>
           <input type='text' />
         </label>
       </div>
 
       <div>
         <label>
-          Blood Type:
+          <p>Blood Type:</p>
           <input type='text' />
         </label>
         <label>
-          Civil Status:
+          <p>Civil Status:</p>
           <input type='text' />
         </label>
       </div>
@@ -71,45 +73,45 @@ const PersonalInformation = () => {
       <h1>CONTACT INFORMATION</h1>
       <div>
         <label>
-          House Number:
+          <p>House Number:</p>
           <input type='text' />
         </label>
         <label>
-          Street Name:
+          <p>Street Name:</p>
           <input type='text' />
         </label>
         <label>
-          Barangay:
+          <p>Barangay:</p>
           <input type='text' />
         </label>
       </div>
 
       <div>
         <label>
-          City/Municipality:
+          <p>City/Municipality:</p>
           <input type='text' />
         </label>
         <label>
-          Province:
+          <p>Province:</p>
           <input type='text' />
         </label>
         <label>
-          Zip Code:
+          <p>Zip Code:</p>
           <input type='text' />
         </label>
       </div>
 
       <div>
-        <label className='flex flex-col w-full'>
-          Cellphone Number:
+        <label>
+          <p>Cellphone Number:</p>
           <input type='text' />
         </label>
         <label>
-          Telephone Number:
+          <p>Telephone Number:</p>
           <input type='text' />
         </label>
         <label>
-          Email:
+          <p>Email:</p>
           <input type='text' />
         </label>
       </div>

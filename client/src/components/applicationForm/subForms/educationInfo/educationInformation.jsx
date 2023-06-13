@@ -7,15 +7,15 @@ const EducaitonInformation = () => {
       <div>
         <h1>Elementary Education Attainment</h1>
         <label>
-          Name of School:
+          <p>Name of School:</p>
           <input type='text' />
         </label>
         <label>
-          Date Graduated:
+          <p>Date Graduated:</p>
           <input type='text' />
         </label>
         <label>
-          Course/Strand:
+          <p>Course/Strand:</p>
           <input type='text' />
         </label>
       </div>
@@ -23,15 +23,15 @@ const EducaitonInformation = () => {
       <div>
         <h1>Junior High School Education Attainment</h1>
         <label>
-          Name of School:
+          <p>Name of School:</p>
           <input type='text' />
         </label>
         <label>
-          Date Graduated:
+          <p>Date Graduated:</p>
           <input type='text' />
         </label>
         <label>
-          Course/Strand:
+          <p>Course/Strand:</p>
           <input type='text' />
         </label>
       </div>
@@ -39,15 +39,15 @@ const EducaitonInformation = () => {
       <div>
         <h1>Senior High School Education Attainment</h1>
         <label>
-          Name of School:
+          <p>Name of School:</p>
           <input type='text' />
         </label>
         <label>
-          Date Graduated:
+          <p>Date Graduated:</p>
           <input type='text' />
         </label>
         <label>
-          Course/Strand:
+          <p>Course/Strand:</p>
           <input type='text' />
         </label>
       </div>
@@ -55,15 +55,15 @@ const EducaitonInformation = () => {
       <div>
         <h1>College Education Attainment</h1>
         <label>
-          Name of School:
+          <p>Name of School:</p>
           <input type='text' />
         </label>
         <label>
-          Date Graduated:
+          <p>Date Graduated:</p>
           <input type='text' />
         </label>
         <label>
-          Course/Strand:
+          <p>Course/Strand:</p>
           <input type='text' />
         </label>
       </div>
@@ -71,15 +71,15 @@ const EducaitonInformation = () => {
       <div>
         <h1>Post Graduate Education Attainment</h1>
         <label>
-          Name of School:
+          <p>Name of School:</p>
           <input type='text' />
         </label>
         <label>
-          Date Graduated:
+          <p>Date Graduated:</p>
           <input type='text' />
         </label>
         <label>
-          Course/Strand:
+          <p>Course/Strand:</p>
           <input type='text' />
         </label>
       </div>

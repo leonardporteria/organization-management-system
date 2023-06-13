@@ -4,19 +4,19 @@ const LegalDependentForm = () => {
   return (
     <div>
       <label>
-        Relationship:
+        <p>Relationship:</p>
         <input type='text' />
       </label>
       <label>
-        Name:
+        <p>Name:</p>
         <input type='text' />
       </label>
       <label>
-        Date of Birth:
+        <p>Date of Birth:</p>
         <input type='text' />
       </label>
       <label>
-        Cellphone Number:
+        <p>Cellphone Number:</p>
         <input type='text' />
       </label>
     </div>

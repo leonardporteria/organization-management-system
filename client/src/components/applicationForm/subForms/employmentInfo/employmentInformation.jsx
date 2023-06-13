@@ -7,29 +7,29 @@ const EmployeeInformation = () => {
 
       <div>
         <label>
-          Name of Office:
+          <p>Name of Office:</p>
           <input type='text' />
         </label>
         <label>
-          Title and Position:
-          <input type='text' />
-        </label>
-      </div>
-
-      <div>
-        <label>
-          Workplace Telephone Number:
-          <input type='text' />
-        </label>
-        <label>
-          Workplace Email:
+          <p>Title and Position:</p>
           <input type='text' />
         </label>
       </div>
 
       <div>
         <label>
-          Company Address:
+          <p>Workplace Telephone Number:</p>
+          <input type='text' />
+        </label>
+        <label>
+          <p>Workplace Email:</p>
+          <input type='text' />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <p>Company Address:</p>
           <input type='text' />
         </label>
       </div>

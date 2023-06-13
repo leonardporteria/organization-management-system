@@ -1,4 +1,35 @@
+import { useState } from 'react';
+
+const ContactInEmergencyForm = () => {
+  return (
+    <div>
+      <label>
+        <p>Relationship:</p>
+        <input type='text' />
+      </label>
+      <label>
+        <p>Name:</p>
+        <input type='text' />
+      </label>
+      <label>
+        <p>Address:</p>
+        <input type='text' />
+      </label>
+      <label>
+        <p>Cellphone Number:</p>
+        <input type='text' />
+      </label>
+    </div>
+  );
+};
+
 const ContactInformation = () => {
+  const [contactCounter, setContactCounter] = useState(2);
+
+  const incrementNumber = () => {
+    setContactCounter((contactCounter) => contactCounter + 1);
+  };
+
   return (
     <div className='Form__Contact'>
       {/* CONTACT PERSON DETAILS */}
@@ -6,42 +37,13 @@ const ContactInformation = () => {
 
       <h1>CONTACT PERSON INFORMATION</h1>
 
-      <div>
-        <label>
-          Relationship:
-          <input type='text' />
-        </label>
-        <label>
-          Name:
-          <input type='text' />
-        </label>
-        <label>
-          Address:
-          <input type='text' />
-        </label>
-        <label>
-          Cellphone Number:
-          <input type='text' />
-        </label>
-      </div>
+      {contactCounter > 0 &&
+        Array.from({ length: contactCounter }).map((_, index) => (
+          <ContactInEmergencyForm key={index} />
+        ))}
 
-      <div>
-        <label className='flex flex-col w-full'>
-          Relationship:
-          <input type='text' />
-        </label>
-        <label>
-          Name:
-          <input type='text' />
-        </label>
-        <label>
-          Address:
-          <input type='text' />
-        </label>
-        <label>
-          Cellphone Number:
-          <input type='text' />
-        </label>
+      <div onClick={incrementNumber}>
+        <h1>ADD NEW FIELD</h1>
       </div>
     </div>
   );
