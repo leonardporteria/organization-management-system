@@ -10,35 +10,15 @@ const OrganizationInformation = ({ onInputChange }) => {
     date_of_application: '',
   });
 
-  const handleClubRegion = (event) => {
+  const handleClubData = (event, name) => {
     setClubData((prevClub) => ({
       ...prevClub,
-      club_region: event.target.value,
-    }));
-  };
-
-  const handleClubName = (event) => {
-    setClubData((prevClub) => ({
-      ...prevClub,
-      club_name: event.target.value,
-    }));
-  };
-
-  const handleClubPresident = (event) => {
-    setClubData((prevClub) => ({
-      ...prevClub,
-      club_president: event.target.value,
-    }));
-  };
-
-  const handleDateOfApplication = (event) => {
-    setClubData((prevClub) => ({
-      ...prevClub,
-      date_of_application: event.target.value,
+      [name]: event.target.value,
     }));
   };
 
   useEffect(() => {
+    console.log(clubData);
     onInputChange(clubData);
   }, [clubData]);
 
@@ -49,20 +29,40 @@ const OrganizationInformation = ({ onInputChange }) => {
 
       <div className='Form__Organization__container'>
         <label>
-          <p>Organization Region:</p>
-          <input type='text' onBlur={handleClubRegion} />
+          <p className='required'>Organization Region</p>
+          <input
+            type='text'
+            onBlur={(e) => {
+              handleClubData(e, 'club_region');
+            }}
+          />
         </label>
         <label>
-          <p>Club Name:</p>
-          <input type='text' onBlur={handleClubName} />
+          <p>Club Name</p>
+          <input
+            type='text'
+            onBlur={(e) => {
+              handleClubData(e, 'club_name');
+            }}
+          />
         </label>
         <label>
-          <p>Club President:</p>
-          <input type='text' onBlur={handleClubPresident} />
+          <p>Club President</p>
+          <input
+            type='text'
+            onBlur={(e) => {
+              handleClubData(e, 'club_president');
+            }}
+          />
         </label>
         <label>
-          <p>Date of Application:</p>
-          <input type='date' onBlur={handleDateOfApplication} />
+          <p>Date of Application</p>
+          <input
+            type='date'
+            onBlur={(e) => {
+              handleClubData(e, 'date_of_application');
+            }}
+          />
         </label>
       </div>
 

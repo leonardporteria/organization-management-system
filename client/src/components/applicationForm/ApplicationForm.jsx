@@ -24,15 +24,25 @@ const ApplicationForm = () => {
     },
     member_information: {
       member_id: '',
-      member_name: '',
+      // name
+      last_name: '',
+      first_name: '',
+      middle_name: '',
+      suffix: '',
+      // ===
       place_of_birth: '',
       date_of_birth: '',
-      address: '',
-      age: '',
+      // address
+      house_number: '',
+      street: '',
+      barangay: '',
+      city: '',
+      province: '',
+      zip_code: '',
+      // ===
       sex: '',
       heigh_in_cm: '',
       weight_in_kg: '',
-      bmi: '',
       civil_status: '',
       nationality: '',
       religion: '',
@@ -40,6 +50,10 @@ const ApplicationForm = () => {
       telephone_number: '',
       cellphone_number: '',
       email: '',
+      // derived
+      age: '',
+      bmi: '',
+      // ===
       sponsor_name: '',
       sponsor_membership_id: '',
       work_title_or_position: '',
@@ -89,8 +103,8 @@ const ApplicationForm = () => {
     ],
   });
 
-  const handleOnInputChange = useCallback((value) => {
-    console.log(value);
+  // ORGANIZATION CALLBACK
+  const handleOrganizationInput = useCallback((value) => {
     setApplicantData((prevData) => ({
       ...prevData,
       application_status: {
@@ -107,7 +121,15 @@ const ApplicationForm = () => {
     }));
   });
 
-  const handleSubmit = () => {
+  // PERSONAL DETAILS CALLBACK
+  const handlePersonalInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      member_information: { ...prevData.member_information, ...value },
+    }));
+  });
+
+  const handleFormSubmit = () => {
     console.log('submit');
 
     console.log(applicantData);
@@ -123,15 +145,15 @@ const ApplicationForm = () => {
       </div>
 
       <div className='Form'>
-        <OrganizationInformation onInputChange={handleOnInputChange} />
-        <PersonalInformation />
+        <OrganizationInformation onInputChange={handleOrganizationInput} />
+        <PersonalInformation onInputChange={handlePersonalInput} />
         <EmployeeInformation />
         <EducaitonInformation />
         <LegalDependentInformation />
         <ContactInformation />
         <SponsorInformation />
 
-        <div className='Form__button' onClick={handleSubmit}>
+        <div className='Form__button' onClick={handleFormSubmit}>
           <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>
         </div>
       </div>

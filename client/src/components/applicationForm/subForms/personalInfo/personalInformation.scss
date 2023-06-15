@@ -18,10 +18,22 @@
     font-size: 1rem;
   }
 
-  &__details {
+  &__name {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
+    > label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      width: 100%;
+    }
+  }
+
+  &__details {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(3, 1fr);
     > label {
       display: flex;
       flex-direction: column;
