@@ -1,30 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import './legalDependentsInformation.scss';
 
-const LegalDependentForm = () => {
+const LegalDependentForm = ({ index, handleDependentData }) => {
   return (
     <div className='Form__Dependent__container'>
       <label>
         <p>Relationship:</p>
-        <input type='text' />
+        <input
+          type='text'
+          onBlur={(e) => {
+            handleDependentData(e, index, 'dependent_relationship');
+          }}
+        />
       </label>
       <label>
         <p>Name:</p>
-        <input type='text' />
+        <input
+          type='text'
+          onBlur={(e) => {
+            handleDependentData(e, index, 'dependent_name');
+          }}
+        />
       </label>
       <label>
         <p>Date of Birth:</p>
-        <input type='text' />
+        <input
+          type='date'
+          onBlur={(e) => {
+            handleDependentData(e, index, 'dependent_date_of_birth');
+          }}
+        />
       </label>
       <label>
         <p>Cellphone Number:</p>
-        <input type='text' />
+        <input
+          type='text'
+          onBlur={(e) => {
+            handleDependentData(e, index, 'dependent_contact_number');
+          }}
+        />
       </label>
     </div>
   );
 };
 
-const LegalDependentInformation = () => {
+const LegalDependentInformation = ({ onInputChange }) => {
   const [dependentCounter, setDependentCounter] = useState(1);
 
   const incrementNumber = () => {
@@ -35,6 +56,23 @@ const LegalDependentInformation = () => {
     setDependentCounter((dependentCounter) => dependentCounter - 1);
   };
 
+  const [dependentData, setDependentData] = useState({});
+
+  const handleDependentData = (event, index, name) => {
+    setDependentData((prevDependentData) => ({
+      ...prevDependentData,
+      [index]: {
+        ...prevDependentData[index],
+        [name]: event.target.value,
+      },
+    }));
+  };
+
+  useEffect(() => {
+    //console.log(dependentData);
+    onInputChange(dependentData);
+  }, [dependentData]);
+
   return (
     <div className='Form__Dependent'>
       {/* LEGAL DEPENDENTS DETAILS */}
@@ -43,7 +81,11 @@ const LegalDependentInformation = () => {
 
       {dependentCounter > 0 &&
         Array.from({ length: dependentCounter }).map((_, index) => (
-          <LegalDependentForm key={index} />
+          <LegalDependentForm
+            index={index}
+            key={index}
+            handleDependentData={handleDependentData}
+          />
         ))}
 
       <div className='Form__Dependent__btn'>

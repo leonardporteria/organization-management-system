@@ -31,12 +31,6 @@ const PersonalInformation = ({ onInputChange }) => {
     telephone_number: '',
     cellphone_number: '',
     email: '',
-    house_number: '',
-    street: '',
-    barangay: '',
-    city: '',
-    province: '',
-    zip_code: '',
   });
 
   const handlePersonalData = (event, name) => {
@@ -47,7 +41,7 @@ const PersonalInformation = ({ onInputChange }) => {
   };
 
   useEffect(() => {
-    console.log(personalData);
+    // console.log(personalData);
     onInputChange(personalData);
   }, [personalData]);
 
@@ -56,6 +50,7 @@ const PersonalInformation = ({ onInputChange }) => {
       {/* PERSONAL DETAILS */}
       <h1 className='Form__Personal__title'>PERSONAL INFORMATION</h1>
 
+      <h1 className='Form__Personal__title_c'>Name</h1>
       <div className='Form__Personal__name'>
         <label>
           <p>Last Name:</p>
@@ -95,6 +90,7 @@ const PersonalInformation = ({ onInputChange }) => {
         </label>
       </div>
 
+      <h1 className='Form__Personal__title_c'>Biographical Data</h1>
       <div className='Form__Personal__details'>
         <label>
           <p>Place of Birth:</p>
@@ -186,7 +182,7 @@ const PersonalInformation = ({ onInputChange }) => {
       </div>
 
       {/* CONTACT DETAILS */}
-      <h1 className='Form__Personal__title_c'>CONTACT INFORMATION</h1>
+      <h1 className='Form__Personal__title_c'>Contact Information</h1>
       <div className='Form__Personal__contact'>
         <label>
           <p>Cellphone Number:</p>
@@ -209,7 +205,7 @@ const PersonalInformation = ({ onInputChange }) => {
         <label>
           <p>Email:</p>
           <input
-            type='text'
+            type='email'
             onBlur={(e) => {
               handlePersonalData(e, 'email');
             }}
@@ -217,6 +213,7 @@ const PersonalInformation = ({ onInputChange }) => {
         </label>
       </div>
 
+      <h1 className='Form__Personal__title_c'>Address</h1>
       <div className='Form__Personal__contact'>
         <label>
           <p>House Number:</p>

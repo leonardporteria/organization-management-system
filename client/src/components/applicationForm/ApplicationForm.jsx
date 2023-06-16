@@ -4,7 +4,7 @@ import OrganizationInformation from './subForms/organizationInfo/organizationInf
 import PersonalInformation from './subForms/personalInfo/personalInformation';
 import SponsorInformation from './subForms/sponsorInfo/sponsorInformation';
 import EmployeeInformation from './subForms/employmentInfo/employmentInformation';
-import EducaitonInformation from './subForms/educationInfo/educationInformation';
+import EducationInformation from './subForms/educationInfo/educationInformation';
 import LegalDependentInformation from './subForms/legalDepInfo/legalDependentsInformation';
 import ContactInformation from './subForms/contactInfo/contactInformation';
 
@@ -74,33 +74,47 @@ const ApplicationForm = () => {
       club_president_member_id: '',
     },
     // MULTIVALUES
-    education: [
-      {
+    education: {
+      elementary: {
         education_id: '',
         education_level: '',
         school_name: '',
         date_graduated: '',
         course_strand: '',
       },
-    ],
-    legal_dependents: [
-      {
-        dependent_id: '',
-        dependent_name: '',
-        dependent_date_of_birth: '',
-        dependent_contact_number: '',
-        dependent_relationship: '',
+      junior_hs: {
+        education_id: '',
+        education_level: '',
+        school_name: '',
+        date_graduated: '',
+        course_strand: '',
       },
-    ],
-    contact_person: [
-      {
-        contact_id: '',
-        contact_name: '',
-        contact_cellphone_number: '',
-        contact_address: '',
-        contact_relationship: '',
+      senior_hs: {
+        education_id: '',
+        education_level: '',
+        school_name: '',
+        date_graduated: '',
+        course_strand: '',
       },
-    ],
+      college: {
+        education_id: '',
+        education_level: '',
+        school_name: '',
+        date_graduated: '',
+        course_strand: '',
+      },
+      post_grad: {
+        education_id: '',
+        education_level: '',
+        school_name: '',
+        date_graduated: '',
+        course_strand: '',
+      },
+    },
+
+    legal_dependents: {},
+
+    contact_person: {},
   });
 
   // ORGANIZATION CALLBACK
@@ -129,6 +143,59 @@ const ApplicationForm = () => {
     }));
   });
 
+  // EMPLOYMENT (COMPANY) DETAILS CALLBACK
+  const handleEmploymentInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      member_information: {
+        ...prevData.member_information,
+        work_title_or_position: value.work_title_or_position,
+      },
+
+      company: {
+        ...prevData.company,
+        company_name: value.company_name,
+        company_telephone: value.company_telephone,
+        company_email: value.company_email,
+        company_address: value.company_address,
+      },
+    }));
+  });
+
+  // SPONSOR DETAILS CALLBACK
+  const handleSponsorInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      member_information: { ...prevData.member_information, ...value },
+    }));
+  });
+
+  // MULTIVALUES
+  // EDUCATION DETAILS CALLBACK
+  const handleEducationInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      education: { ...prevData.education, ...value },
+    }));
+  });
+
+  // LEGAL DEPENDENTS DETAILS CALLBACK
+  const handleDependentInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      legal_dependents: { ...prevData.legal_dependents, ...value },
+    }));
+  });
+
+  // CONTACT DETAILS CALLBACK
+  const handleContactInput = useCallback((value) => {
+    setApplicantData((prevData) => ({
+      ...prevData,
+      contact_person: { ...prevData.contact_person, ...value },
+    }));
+  });
+
+  // ON SUBMIT
   const handleFormSubmit = () => {
     console.log('submit');
 
@@ -147,11 +214,11 @@ const ApplicationForm = () => {
       <div className='Form'>
         <OrganizationInformation onInputChange={handleOrganizationInput} />
         <PersonalInformation onInputChange={handlePersonalInput} />
-        <EmployeeInformation />
-        <EducaitonInformation />
-        <LegalDependentInformation />
-        <ContactInformation />
-        <SponsorInformation />
+        <EmployeeInformation onInputChange={handleEmploymentInput} />
+        <EducationInformation onInputChange={handleEducationInput} />
+        <LegalDependentInformation onInputChange={handleDependentInput} />
+        <ContactInformation onInputChange={handleContactInput} />
+        <SponsorInformation onInputChange={handleSponsorInput} />
 
         <div className='Form__button' onClick={handleFormSubmit}>
           <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>

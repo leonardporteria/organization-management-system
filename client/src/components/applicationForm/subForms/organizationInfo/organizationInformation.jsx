@@ -11,14 +11,14 @@ const OrganizationInformation = ({ onInputChange }) => {
   });
 
   const handleClubData = (event, name) => {
-    setClubData((prevClub) => ({
-      ...prevClub,
+    setClubData((prevClubData) => ({
+      ...prevClubData,
       [name]: event.target.value,
     }));
   };
 
   useEffect(() => {
-    console.log(clubData);
+    // console.log(clubData);
     onInputChange(clubData);
   }, [clubData]);
 
