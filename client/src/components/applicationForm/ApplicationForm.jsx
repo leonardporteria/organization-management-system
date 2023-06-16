@@ -13,6 +13,7 @@ import './ApplicationForm.scss';
 const ApplicationForm = () => {
   const [applicantData, setApplicantData] = useState({});
 
+  // SINGLEVALUES
   // ORGANIZATION CALLBACK
   const handleOrganizationInput = useCallback((value) => {
     setApplicantData((prevData) => ({
@@ -92,10 +93,21 @@ const ApplicationForm = () => {
   });
 
   // ON SUBMIT
+  const [fetchResponse, setFetchResponse] = useState(null);
   const handleFormSubmit = () => {
-    console.log('submit');
+    console.log('SUBMIT APPLICATION FORM');
+    const url = 'http://localhost:5173/api/application';
 
-    console.log(applicantData);
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(applicantData),
+    })
+      .then((response) => response.json())
+      .then((result) => setFetchResponse(result))
+      .catch((error) => console.error('Error:', error));
   };
 
   return (
@@ -120,6 +132,8 @@ const ApplicationForm = () => {
           <h1 className='Form__button__submit'>SUBMIT APPLICAITON</h1>
         </div>
       </div>
+
+      {fetchResponse && <div>{JSON.stringify(fetchResponse)}</div>}
     </>
   );
 };

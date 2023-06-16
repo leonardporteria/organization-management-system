@@ -2,10 +2,10 @@ import express from 'express';
 const companyRouter = express.Router();
 
 // insert import
-import { insertIntoTable } from '../schema/insertIntoTable.js';
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 
 // select import
-import { selectFromTable } from '../schema/selectTable.js';
+import { selectFromTable } from '../schema/select/selectTable.js';
 
 /**
  * ROOT PATH: /api
@@ -22,15 +22,9 @@ companyRouter.get('/company/:id', (req, res) => {
 });
 // POST new company
 companyRouter.post('/company', (req, res) => {
-  console.log(req.body);
-  const attributes = [
-    'company_code',
-    'company_name',
-    'company_telephone',
-    'company_email',
-    'company_address',
-  ];
-  const values = Object.values(req.body);
+  console.log(req.body.company);
+  const attributes = Object.keys(req.body.company);
+  const values = Object.values(req.body.company);
 
   insertIntoTable('company', attributes, values);
   res.json({ message: 'POST new company' });
