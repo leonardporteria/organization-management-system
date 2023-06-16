@@ -16,3 +16,8 @@ export const generateMemberId = (uid) => {
   const uniqueId = currentYear + currentDayOfYear + applicantNumber;
   return uniqueId;
 };
+
+export const concatenateMemberId = (memberId, tag, index) => {
+  const multivalueId = `${memberId}-${index.padStart(2, `${tag}`)}`;
+  return multivalueId;
+};
