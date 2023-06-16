@@ -5,36 +5,26 @@ import './educationInformation.scss';
 const EducationInformation = ({ onInputChange }) => {
   const [educationData, setEducationData] = useState({
     elementary: {
-      education_id: '',
-      education_level: '',
       school_name: '',
       date_graduated: '',
       course_strand: '',
     },
     junior_hs: {
-      education_id: '',
-      education_level: '',
       school_name: '',
       date_graduated: '',
       course_strand: '',
     },
     senior_hs: {
-      education_id: '',
-      education_level: '',
       school_name: '',
       date_graduated: '',
       course_strand: '',
     },
     college: {
-      education_id: '',
-      education_level: '',
       school_name: '',
       date_graduated: '',
       course_strand: '',
     },
     post_grad: {
-      education_id: '',
-      education_level: '',
       school_name: '',
       date_graduated: '',
       course_strand: '',
