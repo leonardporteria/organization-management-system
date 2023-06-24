@@ -7,12 +7,10 @@ export const generateMemberId = (uid) => {
     .toString()
     .padStart(3, '0');
 
-  // change random number to autoincrement
-  // select count(member_id) from member_informaiton
-  // where member_id like <id_today>____
-
   const applicantNumber = uid.padStart(4, '0');
 
+  // YYDDDRRRR
+  // Y-year D-day R-random(auto-increment)
   const uniqueId = currentYear + currentDayOfYear + applicantNumber;
   return uniqueId;
 };

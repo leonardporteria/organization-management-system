@@ -1,14 +1,18 @@
 import express from 'express';
 const applicationRouter = express.Router();
 
+// utils import
 import { generateMemberId, concatenateMemberId } from '../utils/idGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
+
+// query imports
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 
 /**
  * ROOT PATH: /api
  */
 // GET all applications
-applicationRouter.get('/application', (req, res) => {
+applicationRouter.get('/application', async (req, res) => {
   res.json({ message: 'GET all applications' });
 });
 
@@ -22,9 +26,7 @@ applicationRouter.post('/application', async (req, res) => {
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
   const member_id = generateMemberId(uid.toString());
-
   req.body.member_information.member_id = member_id;
-  // console.log(req.body.member_information);
 
   // concatenate the id for multivalues
   const educationKeys = Object.keys(req.body.education);
@@ -44,6 +46,34 @@ applicationRouter.post('/application', async (req, res) => {
     req.body.legal_dependents[key].dependent_id = dependentId;
   }
 
+  // QUERY TO DATABASE
+  const {
+    last_name,
+    first_name,
+    middle_name,
+    suffix,
+    house_number,
+    street,
+    barangay,
+    city,
+    province,
+    zip_code,
+    ...rest
+  } = req.body.member_information;
+  // Fullname Concatenation
+  const member_name = `${first_name}, ${middle_name}, ${last_name}, ${suffix}`;
+  // Address Concatenation
+  const address = `${house_number}, ${street}, ${barangay}, ${city}, ${province}, ${zip_code}`;
+
+  const memberInformation = { ...rest, address, member_name };
+
+  const memberAttributes = Object.keys(memberInformation);
+  let memberValues = Object.values(memberInformation);
+
+  console.log(memberValues);
+
+  insertIntoTable('member_information', memberAttributes, memberValues);
+
   res.json({
     message: 'POST new application',
     member_id: member_id,
@@ -51,7 +81,6 @@ applicationRouter.post('/application', async (req, res) => {
     dependent: JSON.stringify(req.body.legal_dependents),
     contact: JSON.stringify(req.body.contact_person),
   });
-  console.log(req.body);
 });
 
 // UPDATE one application by id
