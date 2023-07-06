@@ -15,7 +15,6 @@ contactsRouter.get('/contact/:id', (req, res) => {
 });
 // POST new contact
 contactsRouter.post('/contact', (req, res) => {
-  console.log(req.body);
   res.json({ message: 'POST new contact' });
 });
 // UPDATE one contact by id

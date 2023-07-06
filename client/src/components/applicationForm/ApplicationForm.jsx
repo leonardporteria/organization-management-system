@@ -92,22 +92,66 @@ const ApplicationForm = () => {
     }));
   });
 
+  // API POST REQUEST HELPER
+  const postAPI = async (path) => {
+    try {
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(applicantData),
+      });
+
+      return await response.json();
+    } catch (error) {
+      console.error(`Error in ${path}:`, error);
+      return null;
+    }
+  };
+
   // ON SUBMIT
   const [fetchResponse, setFetchResponse] = useState(null);
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     console.log('SUBMIT APPLICATION FORM');
-    const url = 'http://localhost:5173/api/application';
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(applicantData),
-    })
-      .then((response) => response.json())
-      .then((result) => setFetchResponse(result))
-      .catch((error) => console.error('Error:', error));
+    // API URLs
+    const baseURL = 'http://localhost:5173/api';
+    const applicationURL = baseURL + '/application';
+    const memberURL = baseURL + '/member';
+    const organizationURL = baseURL + '/organization';
+    const companyURL = baseURL + '/company';
+    const contactURL = baseURL + '/contact';
+    const educationURL = baseURL + '/education';
+    const dependentURL = baseURL + '/legalDependent';
+
+    // CONTACT PERSON PATH
+    const contactResponse = await postAPI(contactURL);
+    console.log('Contact POST REQUEST Response: ', contactResponse);
+
+    // EDUCATION PATH
+    const educationResponse = await postAPI(educationURL);
+    console.log('Education POST REQUEST Response: ', educationResponse);
+
+    // LEGAL DEPENDENTS PATH
+    const dependentResponse = await postAPI(dependentURL);
+    console.log('Dependent POST REQUEST Response: ', dependentResponse);
+
+    // COMPANY PATH
+    const companyResponse = await postAPI(companyURL);
+    console.log('Company POST REQUEST Response: ', companyResponse);
+
+    // ORGANIZATION CLUB PATH
+    const organizaitonResponse = await postAPI(organizationURL);
+    console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
+
+    // MEMBER INFORMATION PATH
+    const memberResponse = await postAPI(memberURL);
+    console.log('Member POST REQUEST Response: ', memberResponse);
+
+    // APPLICATION DETAILS PATH
+    const applicationResponse = await postAPI(applicationURL);
+    console.log('Application POST REQUEST Response: ', applicationResponse);
   };
 
   return (

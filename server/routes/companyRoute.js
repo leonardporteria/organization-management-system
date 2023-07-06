@@ -22,11 +22,6 @@ companyRouter.get('/company/:id', (req, res) => {
 });
 // POST new company
 companyRouter.post('/company', (req, res) => {
-  console.log(req.body.company);
-  const attributes = Object.keys(req.body.company);
-  const values = Object.values(req.body.company);
-
-  insertIntoTable('company', attributes, values);
   res.json({ message: 'POST new company' });
 });
 // UPDATE one company by id

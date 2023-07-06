@@ -70,7 +70,7 @@ const ContactInformation = ({ onInputChange }) => {
   };
 
   useEffect(() => {
-    console.log(contactData);
+    // console.log(contactData);
     onInputChange(contactData);
   }, [contactData]);
 

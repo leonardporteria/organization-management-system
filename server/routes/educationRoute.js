@@ -15,7 +15,6 @@ educationRouter.get('/education/:id', (req, res) => {
 });
 // POST new education
 educationRouter.post('/education', (req, res) => {
-  console.log(req.body);
   res.json({ message: 'POST new education' });
 });
 // UPDATE one education by id
