@@ -1,11 +1,16 @@
 import express from 'express';
 const companyRouter = express.Router();
 
-// insert import
-import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
-
-// select import
+// utils import;
+import { getApplicationsToday } from '../schema/select/selectMember.js';
 import { selectFromTable } from '../schema/select/selectTable.js';
+import {
+  generateCompanyCode,
+  concatenateCompanyCode,
+} from '../utils/companyCodeGenerator.js';
+
+// query imports
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 
 /**
  * ROOT PATH: /api
@@ -22,59 +27,31 @@ companyRouter.get('/company/:id', (req, res) => {
 });
 // POST new company
 companyRouter.post('/company', async (req, res) => {
-  // // ID GENERATION
-  // const applicantToday = await getApplicationsToday();
-  // const [uid] = Object.values(applicantToday[0]);
-  // const member_id = generateMemberId(uid.toString());
-  // req.body.member_information.member_id = member_id;
+  // ID GENERATION
+  const applicantToday = await getApplicationsToday();
+  const [uid] = Object.values(applicantToday[0]);
+  const member_id = generateCompanyCode(uid.toString());
 
-  // // concatenate the id for multivalues
-  // const educationKeys = Object.keys(req.body.education);
-  // educationKeys.forEach((key, index) => {
-  //   const educationId = concatenateMemberId(member_id, 'E', index.toString());
-  //   req.body.education[key].education_id = educationId;
-  //   req.body.education[key].education_level = key;
-  // });
+  // concatenate the id for multivalues
+  // company
+  const companyCode = concatenateCompanyCode(member_id, 'W', '0');
+  req.body.company.company_code = companyCode;
 
-  // for (const key in req.body.contact_person) {
-  //   const contactId = concatenateMemberId(member_id, 'C', key.toString());
-  //   req.body.contact_person[key].contact_id = contactId;
-  // }
+  // QUERY TO DATABASE (COMPANY TABLE)
+  const { company_code, ...rest } = req.body.company;
+  const companyInformation = { ...rest, company_code };
 
-  // for (const key in req.body.legal_dependents) {
-  //   const dependentId = concatenateMemberId(member_id, 'D', key.toString());
-  //   req.body.legal_dependents[key].dependent_id = dependentId;
-  // }
+  const companyAttributes = Object.keys(companyInformation);
+  const companyValues = Object.values(companyInformation);
 
-  // // QUERY TO DATABASE
-  // const {
-  //   last_name,
-  //   first_name,
-  //   middle_name,
-  //   suffix,
-  //   house_number,
-  //   street,
-  //   barangay,
-  //   city,
-  //   province,
-  //   zip_code,
-  //   ...rest
-  // } = req.body.member_information;
-  // // Fullname Concatenation
-  // const member_name = `${first_name}, ${middle_name}, ${last_name}, ${suffix}`;
-  // // Address Concatenation
-  // const address = `${house_number}, ${street}, ${barangay}, ${city}, ${province}, ${zip_code}`;
+  console.log('COMPANY CODE:', companyCode);
 
-  // const memberInformation = { ...rest, address, member_name };
+  await insertIntoTable('company', companyAttributes, companyValues);
 
-  // const memberAttributes = Object.keys(memberInformation);
-  // let memberValues = Object.values(memberInformation);
-
-  // console.log(memberValues);
-
-  // insertIntoTable('company', memberAttributes, memberValues);
-
-  res.json({ message: 'POST new company', company_id: company_id });
+  res.json({
+    message: 'POST new company',
+    company: req.body.company_id,
+  });
 });
 // UPDATE one company by id
 companyRouter.delete('/company/:id', (req, res) => {
