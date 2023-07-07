@@ -8,5 +8,5 @@ export const setUpDatabase = async () => {
   // create tables with pk and fk
   await createTables();
 
-  return 'DATABASE TABLES NOW USABLE';
+  return 'DATABASE IN USE; TABLES ARE UP';
 };

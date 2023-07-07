@@ -4,6 +4,7 @@ const memberRouter = express.Router();
 // utils import
 import { generateMemberId, concatenateMemberId } from '../utils/idGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
+import { selectFromTable } from '../schema/select/selectTable.js';
 
 // query imports
 import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
@@ -12,8 +13,9 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
  * ROOT PATH: /api
  */
 // GET all members
-memberRouter.get('/member', (req, res) => {
-  res.json({ message: 'GET all members' });
+memberRouter.get('/member', async (req, res) => {
+  const rows = await selectFromTable('member_information');
+  res.json({ message: 'GET all members', rows: rows });
 });
 
 // GET one member by id
@@ -78,8 +80,8 @@ memberRouter.post('/member', async (req, res) => {
     message: 'POST new member',
     member_id: member_id,
   });
-  res.json({ message: 'POST new member' });
 });
+
 // UPDATE one member by id
 memberRouter.delete('/member/:id', (req, res) => {
   res.json({ message: 'DELETE one member' });
