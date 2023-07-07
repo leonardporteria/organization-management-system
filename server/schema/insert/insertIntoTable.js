@@ -1,4 +1,6 @@
 import { pool } from '../../config/database.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const insertIntoTable = async (tableName, attributes, values) => {
   const valueString = values
@@ -9,9 +11,11 @@ export const insertIntoTable = async (tableName, attributes, values) => {
     })
     .join(', ');
 
+  const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
   const query = `
   INSERT INTO ${tableName} (${[...attributes]})
   VALUES (${valueString});
       `;
+  await pool.query(useQuery);
   await pool.query(query);
 };

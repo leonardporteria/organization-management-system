@@ -1,12 +1,21 @@
 import express from 'express';
 const educationRouter = express.Router();
 
+// utils import
+import { generateMemberId, concatenateMemberId } from '../utils/idGenerator.js';
+import { getApplicationsToday } from '../schema/select/selectMember.js';
+import { selectFromTable } from '../schema/select/selectTable.js';
+
+// query imports
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
+
 /**
  * ROOT PATH: /api
  */
 // GET all education
-educationRouter.get('/education', (req, res) => {
-  res.json({ message: 'GET all education' });
+educationRouter.get('/education', async (req, res) => {
+  const rows = await selectFromTable('education');
+  res.json({ message: 'GET all education', education: rows });
 });
 
 // GET one education by id
@@ -21,28 +30,26 @@ educationRouter.post('/education', async (req, res) => {
   const member_id = generateMemberId(uid.toString());
 
   // concatenate the id for multivalues
-  // contact person
-  for (const key in req.body.contact_person) {
-    const contactId = concatenateMemberId(member_id, 'C', key.toString());
-    req.body.contact_person[key].contact_id = contactId;
+  // education
+  const educationKeys = Object.keys(req.body.education);
+  educationKeys.forEach(async (key, index) => {
+    const educationId = concatenateMemberId(member_id, 'E', index.toString());
+    req.body.education[key].education_id = educationId;
+    req.body.education[key].education_level = key;
 
-    // QUERY TO DATABASE (CONTACT TABLE)
-    const { contact_id, ...rest } = req.body.contact_person;
-    const contactInformation = { ...rest, contact_id };
+    // QUERY TO DATABASE (EDUCATION TABLE)
+    const { education_id, education_level, ...rest } = req.body.education;
+    const educationInformation = { ...rest, education_id, education_level };
 
-    const contactAttributes = Object.keys(contactInformation[key]);
-    const contactValues = Object.values(contactInformation[key]);
+    const educationAttributes = Object.keys(educationInformation[key]);
+    const educationValues = Object.values(educationInformation[key]);
 
-    console.log('CONTACT ID:', contactId);
+    console.log('EDUCATION ID:', educationId);
 
-    await insertIntoTable('contact_person', contactAttributes, contactValues);
-  }
-
-  res.json({
-    message: 'POST new contact persons',
-    contact_person: req.body.contact_person,
+    await insertIntoTable('education', educationAttributes, educationValues);
   });
-  res.json({ message: 'POST new education' });
+
+  res.json({ message: 'POST new education', eduaction: req.body.education });
 });
 // UPDATE one education by id
 educationRouter.delete('/education/:id', (req, res) => {

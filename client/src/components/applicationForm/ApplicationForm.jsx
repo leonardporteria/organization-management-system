@@ -125,15 +125,15 @@ const ApplicationForm = () => {
     const educationURL = baseURL + '/education';
     const dependentURL = baseURL + '/legalDependent';
 
-    // CONTACT PERSON PATH
+    // CONTACT PERSON PATH [WORKING]
     const contactResponse = await postAPI(contactURL);
     console.log('Contact POST REQUEST Response: ', contactResponse);
 
-    // EDUCATION PATH
+    // EDUCATION PATH [WORKING]
     const educationResponse = await postAPI(educationURL);
     console.log('Education POST REQUEST Response: ', educationResponse);
 
-    // LEGAL DEPENDENTS PATH
+    // LEGAL DEPENDENTS PATH [WORKING]
     const dependentResponse = await postAPI(dependentURL);
     console.log('Dependent POST REQUEST Response: ', dependentResponse);
 
@@ -145,7 +145,7 @@ const ApplicationForm = () => {
     const organizaitonResponse = await postAPI(organizationURL);
     console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
 
-    // MEMBER INFORMATION PATH
+    // MEMBER INFORMATION PATH [WORKING]
     const memberResponse = await postAPI(memberURL);
     console.log('Member POST REQUEST Response: ', memberResponse);
 
