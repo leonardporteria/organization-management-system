@@ -13,7 +13,7 @@ const OrganizationInformation = ({ onInputChange }) => {
   const [availableClubs, setAvailableClubs] = useState({});
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedClub, setSelectedClub] = useState('');
-  const [availableClubNames, setAvailableClubNames] = useState([]);
+  const [isClubDataInitialized, setIsClubDataInitialized] = useState(false);
   const [isDateInitialized, setIsDateInitialized] = useState(false);
   const [isPresidentInitialized, setIsPresidentInitialized] = useState(false);
 
@@ -76,7 +76,6 @@ const OrganizationInformation = ({ onInputChange }) => {
   const handleRegionChange = (e) => {
     const region = e.target.value;
     setSelectedRegion(region);
-    setAvailableClubNames(availableClubs[region] || []);
   };
   const handleClubChange = (e) => {
     const club = e.target.value;
@@ -89,14 +88,29 @@ const OrganizationInformation = ({ onInputChange }) => {
       setClubData((prevClubData) => ({
         ...prevClubData,
         date_of_application: getCurrentDate(),
-        club_president: clubData.club_president,
       }));
       setIsDateInitialized(true);
-      setIsPresidentInitialized(true);
+    }
+    if (selectedRegion && selectedClub && !isClubDataInitialized) {
+      const selectedClubData = availableClubs[selectedRegion]?.find(
+        (club) => club.club_name === selectedClub
+      );
+      if (selectedClubData) {
+        setClubData((prevClubData) => ({
+          ...prevClubData,
+          club_president: selectedClubData.club_president,
+        }));
+      }
+      setIsClubDataInitialized(true);
     }
     getAvailableClub();
     onInputChange(clubData);
-  }, [clubData, isDateInitialized, isPresidentInitialized]);
+  }, [
+    clubData,
+    isDateInitialized,
+    isPresidentInitialized,
+    isClubDataInitialized,
+  ]);
 
   return (
     <div className='Form__Organization'>
