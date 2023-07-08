@@ -15,6 +15,7 @@ const OrganizationInformation = ({ onInputChange }) => {
   const [selectedClub, setSelectedClub] = useState('');
   const [availableClubNames, setAvailableClubNames] = useState([]);
   const [isDateInitialized, setIsDateInitialized] = useState(false);
+  const [isPresidentInitialized, setIsPresidentInitialized] = useState(false);
 
   const handleClubData = (event, name) => {
     setClubData((prevClubData) => ({
@@ -56,11 +57,11 @@ const OrganizationInformation = ({ onInputChange }) => {
       const responseData = await response.json();
 
       const availableRegions = responseData.organization.reduce((acc, club) => {
-        const { club_region, club_name } = club;
+        const { club_region, club_name, club_president } = club;
         if (!acc[club_region]) {
           acc[club_region] = [];
         }
-        acc[club_region].push(club_name);
+        acc[club_region].push({ club_name, club_president });
         return acc;
       }, {});
 
@@ -88,12 +89,14 @@ const OrganizationInformation = ({ onInputChange }) => {
       setClubData((prevClubData) => ({
         ...prevClubData,
         date_of_application: getCurrentDate(),
+        club_president: clubData.club_president,
       }));
       setIsDateInitialized(true);
+      setIsPresidentInitialized(true);
     }
     getAvailableClub();
     onInputChange(clubData);
-  }, [clubData, isDateInitialized]);
+  }, [clubData, isDateInitialized, isPresidentInitialized]);
 
   return (
     <div className='Form__Organization'>
@@ -129,20 +132,25 @@ const OrganizationInformation = ({ onInputChange }) => {
             }}
           >
             <option value=''>Select Club</option>
-            {availableClubNames.map((club) => (
-              <option key={club} value={club}>
-                {club}
-              </option>
-            ))}
+            {selectedRegion &&
+              availableClubs[selectedRegion]?.map((club) => (
+                <option key={club.club_name} value={club.club_name}>
+                  {club.club_name}
+                </option>
+              ))}
           </select>
         </label>
         <label>
           <p>Club President</p>
           <input
             type='text'
-            onBlur={(e) => {
-              handleClubData(e, 'club_president');
-            }}
+            value={
+              (selectedClub &&
+                availableClubs[selectedRegion]?.find(
+                  (club) => club.club_name === selectedClub
+                )?.club_president) ||
+              ''
+            }
             disabled={true}
           />
         </label>
