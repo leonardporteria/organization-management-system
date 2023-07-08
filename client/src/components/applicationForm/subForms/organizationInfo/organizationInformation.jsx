@@ -7,6 +7,7 @@ const OrganizationInformation = ({ onInputChange }) => {
     club_region: '',
     club_name: '',
     club_president: '',
+    club_president_member_id: '',
     date_of_application: '',
   });
 
@@ -42,7 +43,6 @@ const OrganizationInformation = ({ onInputChange }) => {
     return `${year}-${month}-${day}`;
   };
 
-  // FETCH AVAILABLE CLUBS PER REGION
   const getAvailableClub = async () => {
     const baseURL = 'http://localhost:5173/api';
     const organizationURL = baseURL + '/organization';
@@ -57,11 +57,20 @@ const OrganizationInformation = ({ onInputChange }) => {
       const responseData = await response.json();
 
       const availableRegions = responseData.organization.reduce((acc, club) => {
-        const { club_region, club_name, club_president } = club;
+        const {
+          club_region,
+          club_name,
+          club_president,
+          club_president_member_id,
+        } = club;
         if (!acc[club_region]) {
           acc[club_region] = [];
         }
-        acc[club_region].push({ club_name, club_president });
+        acc[club_region].push({
+          club_name,
+          club_president,
+          club_president_member_id,
+        });
         return acc;
       }, {});
 
@@ -99,6 +108,7 @@ const OrganizationInformation = ({ onInputChange }) => {
         setClubData((prevClubData) => ({
           ...prevClubData,
           club_president: selectedClubData.club_president,
+          club_president_member_id: selectedClubData.club_president_member_id,
         }));
       }
       setIsClubDataInitialized(true);
@@ -170,7 +180,11 @@ const OrganizationInformation = ({ onInputChange }) => {
         </label>
         <label>
           <p>Date of Application</p>
-          <input type='date' defaultValue={clubData.date_of_application} />
+          <input
+            type='date'
+            defaultValue={clubData.date_of_application}
+            disabled={true}
+          />
         </label>
       </div>
 
