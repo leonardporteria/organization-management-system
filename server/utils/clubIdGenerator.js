@@ -7,10 +7,10 @@ export const generateClubId = (uid) => {
     .toString()
     .padStart(3, '0');
 
-  const applicantNumber = uid.padStart(7, '0');
+  const applicantNumber = uid.padStart(3, '0');
 
   // YYDDDRRRR
   // Y-year D-day R-random(auto-increment)
-  const uniqueId = currentYear + currentDayOfYear + applicantNumber;
+  const uniqueId = 'CLUB' + currentYear + currentDayOfYear + applicantNumber;
   return uniqueId;
 };

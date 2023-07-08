@@ -17,8 +17,9 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
  * ROOT PATH: /api
  */
 // GET all organizations
-organizationRouter.get('/organization', (req, res) => {
-  res.json({ message: 'GET all organizations' });
+organizationRouter.get('/organization', async (req, res) => {
+  const rows = await selectFromTable('organization_club');
+  res.json({ message: 'GET all organizations', organization: rows });
 });
 
 // GET one organization by id
