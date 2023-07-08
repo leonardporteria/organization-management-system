@@ -1,6 +1,18 @@
 import express from 'express';
 const organizationRouter = express.Router();
 
+// utils import
+import {
+  generateMemberId,
+  concatenateMemberId,
+} from '../utils/memberIdGenerator.js';
+import { getApplicationsToday } from '../schema/select/selectMember.js';
+import { selectFromTable } from '../schema/select/selectTable.js';
+import { generateClubId } from '../utils/clubIdGenerator.js';
+
+// query imports
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
+
 /**
  * ROOT PATH: /api
  */
@@ -14,9 +26,30 @@ organizationRouter.get('/organization/:id', (req, res) => {
   res.json({ message: 'GET one organization' });
 });
 // POST new organization
-organizationRouter.post('/organization', (req, res) => {
-  console.log(req.body);
-  res.json({ message: 'POST new organization' });
+organizationRouter.post('/organization', async (req, res) => {
+  // ID GENERATION
+  const applicantToday = await getApplicationsToday();
+  const [uid] = Object.values(applicantToday[0]);
+  const clubId = generateClubId(uid.toString());
+  req.body.organization_club.club_id = clubId;
+  console.log(clubId);
+
+  // organizaiton
+  // QUERY TO DATABASE (ORGANIZATION TABLE)
+  const { club_id, ...rest } = req.body.organization_club;
+  const clubInformation = { ...rest, club_id };
+
+  const clubAttributes = Object.keys(clubInformation);
+  const clubValues = Object.values(clubInformation);
+
+  console.log('CLUB ID:', clubId);
+
+  await insertIntoTable('organization_club', clubAttributes, clubValues);
+
+  res.json({
+    message: 'POST new organization',
+    club: req.body.organization_club,
+  });
 });
 // UPDATE one organization by id
 organizationRouter.delete('/organization/:id', (req, res) => {

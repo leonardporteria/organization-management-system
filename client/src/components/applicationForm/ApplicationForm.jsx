@@ -137,17 +137,17 @@ const ApplicationForm = () => {
     // const dependentResponse = await postAPI(dependentURL);
     // console.log('Dependent POST REQUEST Response: ', dependentResponse);
 
-    // COMPANY PATH [WORKING]
-    const companyResponse = await postAPI(companyURL);
-    console.log('Company POST REQUEST Response: ', companyResponse);
+    // // COMPANY PATH [WORKING]
+    // const companyResponse = await postAPI(companyURL);
+    // console.log('Company POST REQUEST Response: ', companyResponse);
 
-    // ORGANIZATION CLUB PATH
-    const organizaitonResponse = await postAPI(organizationURL);
-    console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
+    // // ORGANIZATION CLUB PATH [WORKING]
+    // const organizaitonResponse = await postAPI(organizationURL);
+    // console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
 
-    // MEMBER INFORMATION PATH [WORKING]
-    const memberResponse = await postAPI(memberURL);
-    console.log('Member POST REQUEST Response: ', memberResponse);
+    // // MEMBER INFORMATION PATH [WORKING]
+    // const memberResponse = await postAPI(memberURL);
+    // console.log('Member POST REQUEST Response: ', memberResponse);
 
     // APPLICATION DETAILS PATH
     const applicationResponse = await postAPI(applicationURL);

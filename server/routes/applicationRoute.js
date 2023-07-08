@@ -2,7 +2,10 @@ import express from 'express';
 const applicationRouter = express.Router();
 
 // utils import
-import { generateMemberId, concatenateMemberId } from '../utils/idGenerator.js';
+import {
+  generateMemberId,
+  concatenateMemberId,
+} from '../utils/memberIdGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
 
 // query imports
