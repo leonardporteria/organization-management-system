@@ -114,6 +114,7 @@ const ApplicationForm = () => {
   const [fetchResponse, setFetchResponse] = useState(null);
   const handleFormSubmit = async () => {
     console.log('SUBMIT APPLICATION FORM');
+    console.log(applicantData);
 
     // API URLs
     const baseURL = 'http://localhost:5173/api';

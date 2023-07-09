@@ -129,7 +129,7 @@ const OrganizationInformation = ({ onInputChange }) => {
 
       <div className='Form__Organization__container'>
         <label>
-          <p className='required'>Organization Region</p>
+          <p>Organization Region</p>
           <select
             value={selectedRegion}
             onChange={(e) => {
