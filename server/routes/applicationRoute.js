@@ -7,6 +7,7 @@ import {
   concatenateMemberId,
 } from '../utils/memberIdGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
+import { selectFromTable } from '../schema/select/selectTable.js';
 
 // query imports
 import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
@@ -16,7 +17,8 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
  */
 // GET all applications
 applicationRouter.get('/application', async (req, res) => {
-  res.json({ message: 'GET all applications' });
+  const rows = await selectFromTable('application_details');
+  res.json({ message: 'GET all applications', application: rows });
 });
 
 // GET one book by id
@@ -49,7 +51,10 @@ applicationRouter.post('/application', async (req, res) => {
     req.body.legal_dependents[key].dependent_id = dependentId;
   }
 
-  res.json({ message: 'POST new application' });
+  res.json({
+    message: 'POST new application',
+    application_details: req.body.education,
+  });
 });
 
 // UPDATE one application by id

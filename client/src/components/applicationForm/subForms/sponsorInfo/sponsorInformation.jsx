@@ -44,14 +44,12 @@ const SponsorInformation = ({ onInputChange }) => {
       (member) => member.member_id === inputMemberId
     );
     setMemberExists(() => memberExists);
-    console.log('Member exists:', memberExists);
 
     handleSponsorInfo(memberExists, event);
   };
 
   // set the member name and id of the sponsor
   const handleSponsorInfo = (memberExists, event) => {
-    console.log('onblur', memberExists);
     if (memberExists) {
       const inputMemberId = event.target.value;
       const matchedMember = availableMember.find(

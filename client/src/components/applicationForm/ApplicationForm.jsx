@@ -28,6 +28,7 @@ const ApplicationForm = () => {
         club_region: value.club_region,
         club_name: value.club_name,
         club_president: value.club_president,
+        club_president_member_id: value.club_president_member_id,
       },
     }));
   });
