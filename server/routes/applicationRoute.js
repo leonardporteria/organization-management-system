@@ -33,27 +33,60 @@ applicationRouter.post('/application', async (req, res) => {
   const member_id = generateMemberId(uid.toString());
   req.body.member_information.member_id = member_id;
 
-  // concatenate the id for multivalues
+  console.log(req.body.education);
+  console.log(req.body.contact_person);
+  console.log(req.body.legal_dependents);
+
+  // Initialize an empty array to hold the objects
+  const applicantDetails = [];
+
+  // Generate unique IDs and distribute the values into objects
   const educationKeys = Object.keys(req.body.education);
-  educationKeys.forEach((key, index) => {
-    const educationId = concatenateMemberId(member_id, 'E', index.toString());
-    req.body.education[key].education_id = educationId;
-    req.body.education[key].education_level = key;
+  const contactKeys = Object.keys(req.body.contact_person);
+  const dependentKeys = Object.keys(req.body.legal_dependents);
+
+  // Loop through each contact key and create an object for each combination of values
+  contactKeys.forEach((contactKey) => {
+    const contact = req.body.contact_person[contactKey];
+
+    dependentKeys.forEach((dependentKey) => {
+      educationKeys.forEach((educationKey) => {
+        const educationId = concatenateMemberId(
+          member_id,
+          'E',
+          educationKey.toString()
+        );
+        const contactId = concatenateMemberId(
+          member_id,
+          'C',
+          contactKey.toString()
+        );
+        const dependentId = concatenateMemberId(
+          member_id,
+          'D',
+          dependentKey.toString()
+        );
+
+        const applicant = {
+          applicant_code: applicantDetails.length + 1,
+          member_id: member_id,
+          club_id: 1,
+          contact_id: contactId,
+          education_id: educationId,
+          dependent_id: dependentId,
+          application_status: 'Pending',
+        };
+
+        applicantDetails.push(applicant);
+      });
+    });
   });
 
-  for (const key in req.body.contact_person) {
-    const contactId = concatenateMemberId(member_id, 'C', key.toString());
-    req.body.contact_person[key].contact_id = contactId;
-  }
-
-  for (const key in req.body.legal_dependents) {
-    const dependentId = concatenateMemberId(member_id, 'D', key.toString());
-    req.body.legal_dependents[key].dependent_id = dependentId;
-  }
+  console.log(applicantDetails);
 
   res.json({
     message: 'POST new application',
-    application_details: req.body.education,
+    application_details: applicantDetails,
   });
 });
 
