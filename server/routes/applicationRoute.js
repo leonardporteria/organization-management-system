@@ -76,8 +76,6 @@ applicationRouter.post('/application', async (req, res) => {
         member_id: member_id,
         club_id: req.body.organization_club.club_id,
         contact_id: contactId,
-        dependent_id: 'null',
-        education_id: 'null',
         application_status: 'Pending',
         date_of_application: req.body.application_status.date_of_application,
       };
@@ -102,7 +100,6 @@ applicationRouter.post('/application', async (req, res) => {
           club_id: req.body.organization_club.club_id,
           contact_id: contactId,
           dependent_id: dependentId,
-          education_id: 'null',
           application_status: 'Pending',
           date_of_application: req.body.application_status.date_of_application,
         };
@@ -127,13 +124,12 @@ applicationRouter.post('/application', async (req, res) => {
           educationValue.date_graduated !== '' &&
           educationValue.course_strand !== ''
             ? concatenateMemberId(member_id, 'E', index.toString())
-            : 'null';
+            : null;
 
         const applicant = {
           member_id: member_id,
           club_id: req.body.organization_club.club_id,
           contact_id: contactId,
-          dependent_id: 'null',
           education_id: educationId,
           application_status: 'Pending',
           date_of_application: req.body.application_status.date_of_application,
@@ -164,7 +160,7 @@ applicationRouter.post('/application', async (req, res) => {
             educationValue.date_graduated !== '' &&
             educationValue.course_strand !== ''
               ? concatenateMemberId(member_id, 'E', index.toString())
-              : 'null';
+              : null;
 
           const applicant = {
             member_id: member_id,

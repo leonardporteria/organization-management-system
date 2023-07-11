@@ -5,10 +5,12 @@ dotenv.config();
 export const insertIntoTable = async (tableName, attributes, values) => {
   const valueString = values
     .map((val) => {
-      if (!val.trim()) return `null`;
+      if (val === null) return 'null';
+      if (!val.trim()) return '';
       if (!isNaN(val) && val.length !== 9) return val;
       return `"${val}"`;
     })
+    .filter((val) => val !== '')
     .join(', ');
 
   const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
