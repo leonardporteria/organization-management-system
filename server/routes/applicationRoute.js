@@ -33,6 +33,7 @@ applicationRouter.post('/application', async (req, res) => {
   const member_id = generateMemberId(uid.toString());
   req.body.member_information.member_id = member_id;
 
+  console.log(req.body.organization_club);
   console.log(req.body.education);
   console.log(req.body.contact_person);
   console.log(req.body.legal_dependents);
@@ -47,37 +48,71 @@ applicationRouter.post('/application', async (req, res) => {
 
   // Loop through each contact key and create an object for each combination of values
   contactKeys.forEach((contactKey) => {
-    const contact = req.body.contact_person[contactKey];
-
     dependentKeys.forEach((dependentKey) => {
-      educationKeys.forEach((educationKey) => {
-        const educationId = concatenateMemberId(
-          member_id,
-          'E',
-          educationKey.toString()
-        );
-        const contactId = concatenateMemberId(
-          member_id,
-          'C',
-          contactKey.toString()
-        );
-        const dependentId = concatenateMemberId(
-          member_id,
-          'D',
-          dependentKey.toString()
-        );
+      educationKeys.forEach((educationKey, index) => {
+        const educationValue = req.body.education[educationKey];
+        console.log(educationValue);
 
-        const applicant = {
-          applicant_code: applicantDetails.length + 1,
-          member_id: member_id,
-          club_id: 1,
-          contact_id: contactId,
-          education_id: educationId,
-          dependent_id: dependentId,
-          application_status: 'Pending',
-        };
+        if (
+          educationValue.school_name !== '' &&
+          educationValue.date_graduated !== '' &&
+          educationValue.course_strand !== ''
+        ) {
+          console.log('may laman educ');
+          const educationId = concatenateMemberId(
+            member_id,
+            'E',
+            index.toString()
+          );
 
-        applicantDetails.push(applicant);
+          const contactId = concatenateMemberId(
+            member_id,
+            'C',
+            contactKey.toString()
+          );
+          const dependentId = concatenateMemberId(
+            member_id,
+            'D',
+            dependentKey.toString()
+          );
+
+          const applicant = {
+            applicant_code: applicantDetails.length + 1,
+            member_id: member_id,
+            club_id: req.body.organization_club.club_id,
+            contact_id: contactId,
+            dependent_id: dependentId,
+            education_id: educationId,
+            application_status: 'Pending',
+          };
+
+          applicantDetails.push(applicant);
+        } else {
+          console.log('wala laman educ');
+
+          const contactId = concatenateMemberId(
+            member_id,
+            'C',
+            contactKey.toString()
+          );
+          const dependentId = concatenateMemberId(
+            member_id,
+            'D',
+            dependentKey.toString()
+          );
+
+          const applicant = {
+            applicant_code: applicantDetails.length + 1,
+            member_id: member_id,
+            club_id: req.body.organization_club.club_id,
+            contact_id: contactId,
+            dependent_id: dependentId,
+            education_id: null,
+            application_status: 'Pending',
+          };
+
+          applicantDetails.push(applicant);
+        }
       });
     });
   });

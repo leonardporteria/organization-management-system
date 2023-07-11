@@ -4,6 +4,7 @@ import './organizationInformation.scss';
 
 const OrganizationInformation = ({ onInputChange }) => {
   const [clubData, setClubData] = useState({
+    club_id: '',
     club_region: '',
     club_name: '',
     club_president: '',
@@ -58,6 +59,7 @@ const OrganizationInformation = ({ onInputChange }) => {
 
       const availableRegions = responseData.organization.reduce((acc, club) => {
         const {
+          club_id,
           club_region,
           club_name,
           club_president,
@@ -67,6 +69,7 @@ const OrganizationInformation = ({ onInputChange }) => {
           acc[club_region] = [];
         }
         acc[club_region].push({
+          club_id,
           club_name,
           club_president,
           club_president_member_id,
@@ -107,6 +110,7 @@ const OrganizationInformation = ({ onInputChange }) => {
       if (selectedClubData) {
         setClubData((prevClubData) => ({
           ...prevClubData,
+          club_id: selectedClubData.club_id,
           club_president: selectedClubData.club_president,
           club_president_member_id: selectedClubData.club_president_member_id,
         }));

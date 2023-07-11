@@ -25,6 +25,7 @@ const ApplicationForm = () => {
 
       organization_club: {
         ...prevData.organization_club,
+        club_id: value.club_id,
         club_region: value.club_region,
         club_name: value.club_name,
         club_president: value.club_president,
