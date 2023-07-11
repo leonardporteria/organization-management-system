@@ -19,7 +19,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all applications
 applicationRouter.get('/application', async (req, res) => {
   const rows = await selectFromTable('application_details');
-  res.json({ message: 'GET all applications', application: rows });
+  res.json({ message: 'GET all applications', data: rows });
 });
 
 // GET one book by id

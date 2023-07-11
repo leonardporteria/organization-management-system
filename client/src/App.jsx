@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route, Link, useMatch } from 'react-router-dom';
 
 import LandingPage from './components/landingPage/LandingPage';
 import ApplicationForm from './components/applicationForm/ApplicationForm';
-import LoginPage from './components/loginPage/LoginPage';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import Dashboard from './components/dashboard/Dashboard';
 
 import './App.scss';
 
@@ -30,8 +31,11 @@ function App() {
             <NavLink to='/application' label='Application'>
               Application
             </NavLink>
-            <NavLink to='/login' label='Login'>
-              Login
+            <NavLink to='/admin' label='Admin'>
+              Admin
+            </NavLink>
+            <NavLink to='/dashboard' label='Dashboard'>
+              Dashboard
             </NavLink>
           </div>
         </nav>
@@ -39,7 +43,8 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/application' element={<ApplicationForm />} />
-          <Route path='/login' element={<LoginPage />} />
+          <Route path='/admin' element={<AdminDashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

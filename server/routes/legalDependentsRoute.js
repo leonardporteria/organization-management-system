@@ -18,7 +18,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all legalDependents
 legalDependentsRouter.get('/legalDependent', async (req, res) => {
   const rows = await selectFromTable('legal_dependents');
-  res.json({ message: 'GET all legal dependents', education: rows });
+  res.json({ message: 'GET all legal dependents', data: rows });
 });
 
 // GET one legalDependent by id

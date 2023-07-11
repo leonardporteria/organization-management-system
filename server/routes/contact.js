@@ -18,7 +18,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all contacts
 contactsRouter.get('/contact', async (req, res) => {
   const rows = await selectFromTable('contact_person');
-  res.json({ message: 'GET all contacts', rows: rows });
+  res.json({ message: 'GET all contacts', data: rows });
 });
 
 // GET one contact by id

@@ -15,7 +15,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all members
 memberRouter.get('/member', async (req, res) => {
   const rows = await selectFromTable('member_information');
-  res.json({ message: 'GET all members', members: rows });
+  res.json({ message: 'GET all members', data: rows });
 });
 
 // GET one member by id

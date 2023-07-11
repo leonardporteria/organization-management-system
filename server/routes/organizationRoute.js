@@ -19,7 +19,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all organizations
 organizationRouter.get('/organization', async (req, res) => {
   const rows = await selectFromTable('organization_club');
-  res.json({ message: 'GET all organizations', organization: rows });
+  res.json({ message: 'GET all organizations', data: rows });
 });
 
 // GET one organization by id

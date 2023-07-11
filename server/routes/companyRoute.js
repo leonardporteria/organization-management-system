@@ -18,7 +18,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all company
 companyRouter.get('/company', async (req, res) => {
   const rows = await selectFromTable('member_information');
-  res.json({ message: 'GET all company', rows: rows });
+  res.json({ message: 'GET all company', data: rows });
 });
 
 // GET one company by id

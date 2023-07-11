@@ -18,7 +18,7 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all education
 educationRouter.get('/education', async (req, res) => {
   const rows = await selectFromTable('education');
-  res.json({ message: 'GET all education', education: rows });
+  res.json({ message: 'GET all education', data: rows });
 });
 
 // GET one education by id
