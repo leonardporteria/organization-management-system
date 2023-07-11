@@ -8,6 +8,7 @@ import {
 } from '../utils/memberIdGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
 import { selectFromTable } from '../schema/select/selectTable.js';
+import { removeDuplicates } from '../utils/removeDuplicateEntries.js';
 
 // query imports
 import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
@@ -30,13 +31,14 @@ applicationRouter.post('/application', async (req, res) => {
   // ID GENERATION
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
-  const member_id = generateMemberId(uid.toString());
+  const member_id = generateMemberId((uid - 1).toString());
   req.body.member_information.member_id = member_id;
 
   // console.log(req.body.organization_club);
   // console.log(req.body.education);
   // console.log(req.body.contact_person);
   // console.log(req.body.legal_dependents);
+  // console.log(req.body.application_status.date_of_application);
 
   // Initialize an empty array to hold the objects
   const applicantDetails = [];
@@ -71,42 +73,38 @@ applicationRouter.post('/application', async (req, res) => {
       );
 
       const applicant = {
-        applicant_code: applicantDetails.length + 1,
         member_id: member_id,
         club_id: req.body.organization_club.club_id,
         contact_id: contactId,
-        dependent_id: null,
-        education_id: null,
+        dependent_id: 'null',
+        education_id: 'null',
         application_status: 'Pending',
+        date_of_application: req.body.application_status.date_of_application,
       };
 
       applicantDetails.push(applicant);
     } else if (hasEducationValue === 0) {
       console.log('CONTACT + DEPENDENT');
-      educationKeys.forEach((educationKey, index) => {
-        const educationValue = req.body.education[educationKey];
-        console.log(educationValue);
-
+      dependentKeys.forEach((dependentKey) => {
         const contactId = concatenateMemberId(
           member_id,
           'C',
           contactKey.toString()
         );
-        const educationId =
-          educationValue.school_name !== '' &&
-          educationValue.date_graduated !== '' &&
-          educationValue.course_strand !== ''
-            ? concatenateMemberId(member_id, 'E', index.toString())
-            : null;
+        const dependentId = concatenateMemberId(
+          member_id,
+          'D',
+          dependentKey.toString()
+        );
 
         const applicant = {
-          applicant_code: applicantDetails.length + 1,
           member_id: member_id,
           club_id: req.body.organization_club.club_id,
           contact_id: contactId,
-          dependent_id: null,
-          education_id: educationId,
+          dependent_id: dependentId,
+          education_id: 'null',
           application_status: 'Pending',
+          date_of_application: req.body.application_status.date_of_application,
         };
 
         applicantDetails.push(applicant);
@@ -129,16 +127,16 @@ applicationRouter.post('/application', async (req, res) => {
           educationValue.date_graduated !== '' &&
           educationValue.course_strand !== ''
             ? concatenateMemberId(member_id, 'E', index.toString())
-            : null;
+            : 'null';
 
         const applicant = {
-          applicant_code: applicantDetails.length + 1,
           member_id: member_id,
           club_id: req.body.organization_club.club_id,
           contact_id: contactId,
-          dependent_id: null,
+          dependent_id: 'null',
           education_id: educationId,
           application_status: 'Pending',
+          date_of_application: req.body.application_status.date_of_application,
         };
 
         applicantDetails.push(applicant);
@@ -166,16 +164,17 @@ applicationRouter.post('/application', async (req, res) => {
             educationValue.date_graduated !== '' &&
             educationValue.course_strand !== ''
               ? concatenateMemberId(member_id, 'E', index.toString())
-              : null;
+              : 'null';
 
           const applicant = {
-            applicant_code: applicantDetails.length + 1,
             member_id: member_id,
             club_id: req.body.organization_club.club_id,
             contact_id: contactId,
             dependent_id: dependentId,
             education_id: educationId,
             application_status: 'Pending',
+            date_of_application:
+              req.body.application_status.date_of_application,
           };
 
           applicantDetails.push(applicant);
@@ -185,8 +184,24 @@ applicationRouter.post('/application', async (req, res) => {
   });
 
   // remove repeated values
+  const uniqueArray = removeDuplicates(applicantDetails);
+  // console.log(uniqueArray);
 
-  console.log(applicantDetails);
+  for (const key in uniqueArray) {
+    console.log('key', key);
+
+    const applicatonAttributes = Object.keys(uniqueArray[key]);
+    const applicatonValues = Object.values(uniqueArray[key]);
+    console.log(uniqueArray[key]);
+    // console.log(applicatonAttributes);
+    // console.log(applicatonValues);
+
+    insertIntoTable(
+      'application_details',
+      applicatonAttributes,
+      applicatonValues
+    );
+  }
 
   res.json({
     message: 'POST new application',

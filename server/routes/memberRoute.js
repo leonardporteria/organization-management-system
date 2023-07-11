@@ -52,7 +52,7 @@ memberRouter.post('/member', async (req, res) => {
   const memberInformation = { ...rest, address, member_name };
 
   const memberAttributes = Object.keys(memberInformation);
-  let memberValues = Object.values(memberInformation);
+  const memberValues = Object.values(memberInformation);
 
   console.log(memberValues);
 

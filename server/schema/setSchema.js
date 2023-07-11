@@ -121,7 +121,7 @@ const createMemberRelationTable = async () => {
         education_id char(12),
         dependent_id char(12),
         contact_id char(12) NOT NULL,
-        applcation_status varchar(10) NOT NULL DEFAULT "Pending",
+        application_status varchar(10) NOT NULL DEFAULT "Pending",
         date_of_application	date NOT NULL,
         
         foreign key(member_id) references MEMBER_INFORMATION(member_id),

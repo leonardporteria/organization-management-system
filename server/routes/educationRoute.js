@@ -36,6 +36,14 @@ educationRouter.post('/education', async (req, res) => {
   // education
   const educationKeys = Object.keys(req.body.education);
   educationKeys.forEach(async (key, index) => {
+    if (
+      req.body.education[key].education_level === '' ||
+      req.body.education[key].school_name === '' ||
+      req.body.education[key].date_graduated === '' ||
+      req.body.education[key].course_strand === ''
+    )
+      return;
+
     const educationId = concatenateMemberId(member_id, 'E', index.toString());
     req.body.education[key].education_id = educationId;
     req.body.education[key].education_level = key;
