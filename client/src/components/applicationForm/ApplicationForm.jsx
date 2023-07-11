@@ -152,7 +152,7 @@ const ApplicationForm = () => {
     const memberResponse = await postAPI(memberURL);
     console.log('Member POST REQUEST Response: ', memberResponse);
 
-    // APPLICATION DETAILS PATH
+    // APPLICATION DETAILS PATH [WORKING]
     const applicationResponse = await postAPI(applicationURL);
     console.log('Application POST REQUEST Response: ', applicationResponse);
   };

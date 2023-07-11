@@ -14,8 +14,6 @@ import companyRouter from './routes/companyRoute.js';
 import legalDependentsRouter from './routes/legalDependentsRoute.js';
 import contactsRouter from './routes/contact.js';
 
-// import booksRouter from './routes/books.js';
-
 const PORT = process.env.PORT || 8080;
 
 const app = express();

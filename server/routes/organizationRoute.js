@@ -28,28 +28,24 @@ organizationRouter.get('/organization/:id', (req, res) => {
 });
 // POST new organization
 organizationRouter.post('/organization', async (req, res) => {
+  // SHOULD NOT INSERT IF NOT AN ADMIN
   // ID GENERATION
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
   const clubId = generateClubId(uid.toString());
   req.body.organization_club.club_id = clubId;
   console.log(clubId);
-
   // organizaiton
   // QUERY TO DATABASE (ORGANIZATION TABLE)
   const { club_id, ...rest } = req.body.organization_club;
   const clubInformation = { ...rest, club_id };
-
   const clubAttributes = Object.keys(clubInformation);
   const clubValues = Object.values(clubInformation);
-
   console.log('CLUB ID:', clubId);
-
-  await insertIntoTable('organization_club', clubAttributes, clubValues);
-
+  // await insertIntoTable('organization_club', clubAttributes, clubValues);
   res.json({
     message: 'POST new organization',
-    club: req.body.organization_club,
+    club: clubInformation,
   });
 });
 // UPDATE one organization by id

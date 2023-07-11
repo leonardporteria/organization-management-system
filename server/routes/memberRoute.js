@@ -24,6 +24,7 @@ memberRouter.get('/member/:id', (req, res) => {
 });
 // POST new member
 memberRouter.post('/member', async (req, res) => {
+  console.log('INSERTING TO MEMBER TABLE');
   // ID GENERATION
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
@@ -53,8 +54,8 @@ memberRouter.post('/member', async (req, res) => {
 
   const memberAttributes = Object.keys(memberInformation);
   const memberValues = Object.values(memberInformation);
-
-  console.log(memberValues);
+  console.log('Member Info');
+  console.log(memberInformation);
 
   insertIntoTable('member_information', memberAttributes, memberValues);
 

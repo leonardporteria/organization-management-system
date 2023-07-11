@@ -50,7 +50,7 @@ companyRouter.post('/company', async (req, res) => {
 
   res.json({
     message: 'POST new company',
-    company: req.body.company_id,
+    company: companyInformation,
   });
 });
 // UPDATE one company by id

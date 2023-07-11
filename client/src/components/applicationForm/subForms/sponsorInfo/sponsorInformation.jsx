@@ -5,8 +5,8 @@ import './sponsorInformation.scss';
 const SponsorInformation = ({ onInputChange }) => {
   const [availableMember, setAvailableMember] = useState([]);
   const [sponsorData, setSponsordata] = useState({
-    sponsor_membership_id: '',
-    sponsor_name: '',
+    sponsor_membership_id: null,
+    sponsor_name: null,
   });
 
   const getAvailableMemberIds = async () => {
