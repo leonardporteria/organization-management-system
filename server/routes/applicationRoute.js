@@ -33,10 +33,10 @@ applicationRouter.post('/application', async (req, res) => {
   const member_id = generateMemberId(uid.toString());
   req.body.member_information.member_id = member_id;
 
-  console.log(req.body.organization_club);
-  console.log(req.body.education);
-  console.log(req.body.contact_person);
-  console.log(req.body.legal_dependents);
+  // console.log(req.body.organization_club);
+  // console.log(req.body.education);
+  // console.log(req.body.contact_person);
+  // console.log(req.body.legal_dependents);
 
   // Initialize an empty array to hold the objects
   const applicantDetails = [];
@@ -46,24 +46,110 @@ applicationRouter.post('/application', async (req, res) => {
   const contactKeys = Object.keys(req.body.contact_person);
   const dependentKeys = Object.keys(req.body.legal_dependents);
 
-  // Loop through each contact key and create an object for each combination of values
   contactKeys.forEach((contactKey) => {
-    dependentKeys.forEach((dependentKey) => {
+    let hasEducationValue = 0;
+
+    for (const key in req.body.education) {
+      const obj = req.body.education[key];
+      const hasValue = Object.values(obj).some((value) => value !== '');
+      if (hasValue) {
+        hasEducationValue++;
+      }
+    }
+
+    console.log('contact length: ', contactKeys.length);
+    console.log('dep length: ', dependentKeys.length);
+    console.log('educ length: ', hasEducationValue);
+
+    if (dependentKeys.length === 0 && hasEducationValue === 0) {
+      // empty dependent and education
+      console.log('CONTACT ONLY');
+      const contactId = concatenateMemberId(
+        member_id,
+        'C',
+        contactKey.toString()
+      );
+
+      const applicant = {
+        applicant_code: applicantDetails.length + 1,
+        member_id: member_id,
+        club_id: req.body.organization_club.club_id,
+        contact_id: contactId,
+        dependent_id: null,
+        education_id: null,
+        application_status: 'Pending',
+      };
+
+      applicantDetails.push(applicant);
+    } else if (hasEducationValue === 0) {
+      console.log('CONTACT + DEPENDENT');
       educationKeys.forEach((educationKey, index) => {
         const educationValue = req.body.education[educationKey];
         console.log(educationValue);
 
-        if (
+        const contactId = concatenateMemberId(
+          member_id,
+          'C',
+          contactKey.toString()
+        );
+        const educationId =
           educationValue.school_name !== '' &&
           educationValue.date_graduated !== '' &&
           educationValue.course_strand !== ''
-        ) {
-          console.log('may laman educ');
-          const educationId = concatenateMemberId(
-            member_id,
-            'E',
-            index.toString()
-          );
+            ? concatenateMemberId(member_id, 'E', index.toString())
+            : null;
+
+        const applicant = {
+          applicant_code: applicantDetails.length + 1,
+          member_id: member_id,
+          club_id: req.body.organization_club.club_id,
+          contact_id: contactId,
+          dependent_id: null,
+          education_id: educationId,
+          application_status: 'Pending',
+        };
+
+        applicantDetails.push(applicant);
+      });
+    } else if (dependentKeys.length === 0) {
+      console.log('CONTACT + EDUCACTION');
+
+      educationKeys.forEach((educationKey, index) => {
+        const educationValue = req.body.education[educationKey];
+        console.log(educationValue);
+
+        const contactId = concatenateMemberId(
+          member_id,
+          'C',
+          contactKey.toString()
+        );
+
+        const educationId =
+          educationValue.school_name !== '' &&
+          educationValue.date_graduated !== '' &&
+          educationValue.course_strand !== ''
+            ? concatenateMemberId(member_id, 'E', index.toString())
+            : null;
+
+        const applicant = {
+          applicant_code: applicantDetails.length + 1,
+          member_id: member_id,
+          club_id: req.body.organization_club.club_id,
+          contact_id: contactId,
+          dependent_id: null,
+          education_id: educationId,
+          application_status: 'Pending',
+        };
+
+        applicantDetails.push(applicant);
+      });
+    } else {
+      // empty education
+      console.log('DEPENDENT + CONTACT + EDUCATION');
+      dependentKeys.forEach((dependentKey) => {
+        educationKeys.forEach((educationKey, index) => {
+          const educationValue = req.body.education[educationKey];
+          console.log(educationValue);
 
           const contactId = concatenateMemberId(
             member_id,
@@ -75,6 +161,12 @@ applicationRouter.post('/application', async (req, res) => {
             'D',
             dependentKey.toString()
           );
+          const educationId =
+            educationValue.school_name !== '' &&
+            educationValue.date_graduated !== '' &&
+            educationValue.course_strand !== ''
+              ? concatenateMemberId(member_id, 'E', index.toString())
+              : null;
 
           const applicant = {
             applicant_code: applicantDetails.length + 1,
@@ -87,35 +179,12 @@ applicationRouter.post('/application', async (req, res) => {
           };
 
           applicantDetails.push(applicant);
-        } else {
-          console.log('wala laman educ');
-
-          const contactId = concatenateMemberId(
-            member_id,
-            'C',
-            contactKey.toString()
-          );
-          const dependentId = concatenateMemberId(
-            member_id,
-            'D',
-            dependentKey.toString()
-          );
-
-          const applicant = {
-            applicant_code: applicantDetails.length + 1,
-            member_id: member_id,
-            club_id: req.body.organization_club.club_id,
-            contact_id: contactId,
-            dependent_id: dependentId,
-            education_id: null,
-            application_status: 'Pending',
-          };
-
-          applicantDetails.push(applicant);
-        }
+        });
       });
-    });
+    }
   });
+
+  // remove repeated values
 
   console.log(applicantDetails);
 
