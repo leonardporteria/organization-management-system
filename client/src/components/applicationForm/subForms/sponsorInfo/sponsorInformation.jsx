@@ -90,10 +90,6 @@ const SponsorInformation = ({ onInputChange }) => {
 
       <div className='Form__Sponsor__container'>
         <label>
-          <p>Sponsor Name:</p>
-          <input type='text' defaultValue={sponsorMemberName} disabled={true} />
-        </label>
-        <label>
           <p>Membership Number:</p>
           <input
             type='text'
@@ -101,6 +97,10 @@ const SponsorInformation = ({ onInputChange }) => {
               handleMemberNumberChange(e);
             }}
           />
+        </label>
+        <label className='auto-fill'>
+          <p>Sponsor Name:</p>
+          <input type='text' defaultValue={sponsorMemberName} disabled={true} />
         </label>
       </div>
 

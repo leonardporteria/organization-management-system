@@ -13,6 +13,7 @@ import educationRouter from './routes/educationRoute.js';
 import companyRouter from './routes/companyRoute.js';
 import legalDependentsRouter from './routes/legalDependentsRoute.js';
 import contactsRouter from './routes/contact.js';
+import queryRouter from './routes/queryRoutes.js';
 
 const PORT = process.env.PORT || 8080;
 
@@ -47,6 +48,7 @@ app.use('/api', educationRouter);
 app.use('/api', companyRouter);
 app.use('/api', legalDependentsRouter);
 app.use('/api', contactsRouter);
+app.use('/api', queryRouter);
 
 // CONNECTION
 app.listen(PORT, () => {

@@ -39,6 +39,16 @@
       flex-direction: column;
       gap: 0.25rem;
       width: 100%;
+      > select {
+        cursor: pointer;
+        background-color: $neutral-900;
+        border: 0;
+        border-radius: 0.2rem;
+        font-family: 'Montserrat', sans-serif;
+        color: $neutral-50;
+        padding: 0.44rem;
+        min-width: 15rem;
+      }
     }
   }
 

@@ -168,7 +168,7 @@ const OrganizationInformation = ({ onInputChange }) => {
               ))}
           </select>
         </label>
-        <label>
+        <label className='auto-fill'>
           <p>Club President</p>
           <input
             type='text'
@@ -182,7 +182,7 @@ const OrganizationInformation = ({ onInputChange }) => {
             disabled={true}
           />
         </label>
-        <label>
+        <label className='auto-fill'>
           <p>Date of Application</p>
           <input
             type='date'

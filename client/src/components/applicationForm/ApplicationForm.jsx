@@ -128,33 +128,33 @@ const ApplicationForm = () => {
     const educationURL = baseURL + '/education';
     const dependentURL = baseURL + '/legalDependent';
 
-    // CONTACT PERSON PATH [WORKING]
-    const contactResponse = await postAPI(contactURL);
-    console.log('Contact POST REQUEST Response: ', contactResponse);
+    // // CONTACT PERSON PATH [WORKING]
+    // const contactResponse = await postAPI(contactURL);
+    // console.log('Contact POST REQUEST Response: ', contactResponse);
 
-    // EDUCATION PATH [WORKING]
-    const educationResponse = await postAPI(educationURL);
-    console.log('Education POST REQUEST Response: ', educationResponse);
+    // // EDUCATION PATH [WORKING]
+    // const educationResponse = await postAPI(educationURL);
+    // console.log('Education POST REQUEST Response: ', educationResponse);
 
-    // LEGAL DEPENDENTS PATH [WORKING]
-    const dependentResponse = await postAPI(dependentURL);
-    console.log('Dependent POST REQUEST Response: ', dependentResponse);
+    // // LEGAL DEPENDENTS PATH [WORKING]
+    // const dependentResponse = await postAPI(dependentURL);
+    // console.log('Dependent POST REQUEST Response: ', dependentResponse);
 
-    // COMPANY PATH [WORKING]
-    const companyResponse = await postAPI(companyURL);
-    console.log('Company POST REQUEST Response: ', companyResponse);
+    // // COMPANY PATH [WORKING]
+    // const companyResponse = await postAPI(companyURL);
+    // console.log('Company POST REQUEST Response: ', companyResponse);
 
-    // ORGANIZATION CLUB PATH [WORKING]
-    const organizaitonResponse = await postAPI(organizationURL);
-    console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
+    // // ORGANIZATION CLUB PATH [WORKING]
+    // const organizaitonResponse = await postAPI(organizationURL);
+    // console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
 
-    // MEMBER INFORMATION PATH [WORKING]
-    const memberResponse = await postAPI(memberURL);
-    console.log('Member POST REQUEST Response: ', memberResponse);
+    // // MEMBER INFORMATION PATH [WORKING]
+    // const memberResponse = await postAPI(memberURL);
+    // console.log('Member POST REQUEST Response: ', memberResponse);
 
-    // APPLICATION DETAILS PATH [WORKING]
-    const applicationResponse = await postAPI(applicationURL);
-    console.log('Application POST REQUEST Response: ', applicationResponse);
+    // // APPLICATION DETAILS PATH [WORKING]
+    // const applicationResponse = await postAPI(applicationURL);
+    // console.log('Application POST REQUEST Response: ', applicationResponse);
   };
 
   return (

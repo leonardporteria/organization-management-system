@@ -11,6 +11,8 @@ const Dashboard = () => {
   const [educationData, setEducationData] = useState([]);
   const [dependentData, setDependentData] = useState([]);
 
+  const [queryResult, setQueryResult] = useState([]);
+
   const getDataFromDatabase = async (path, stateVariable) => {
     const URL = 'http://localhost:5173/api' + path;
 
@@ -29,14 +31,27 @@ const Dashboard = () => {
     }
   };
 
-  const test = () => {
-    console.log(applicationData);
-    console.log(memberData);
-    console.log(organizationData);
-    console.log(companyData);
-    console.log(contactData);
-    console.log(educationData);
-    console.log(dependentData);
+  const getResultFromQuery = async (params) => {
+    const URL = 'http://localhost:5173/api/query/' + params;
+
+    try {
+      const response = await fetch(URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const responseData = await response.json();
+
+      return responseData.data;
+    } catch (error) {
+      console.error(`Error in ${URL}:`, error);
+    }
+  };
+
+  const handleQueryClick = async (params) => {
+    setQueryResult(await getResultFromQuery(params));
+    console.log(queryResult);
   };
 
   useEffect(() => {
@@ -82,6 +97,39 @@ const Dashboard = () => {
         <h1>
           Welcome to Socio-Civing Organization <br /> Dashboard Tables
         </h1>
+      </div>
+
+      <div className='Dashboard__Section Dashboard__Menu'>
+        <h1>Menu</h1>
+        <div
+          className='Dashboard__Button Dashboard__Query'
+          onClick={() => {
+            handleQueryClick(1);
+          }}
+        >
+          <h1>Query</h1>
+        </div>
+        <div className='Dashboard__Menu__Table'>
+          <table>
+            <thead>
+              <tr>
+                {queryResult.length > 0 &&
+                  Object.keys(queryResult[0]).map((key) => (
+                    <th key={key}>{key}</th>
+                  ))}
+              </tr>
+            </thead>
+            <tbody>
+              {queryResult.map((row, index) => (
+                <tr key={index}>
+                  {Object.values(row).map((value, idx) => (
+                    <td key={idx}>{value}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className='Dashboard__Section Dashboard__Tables'>

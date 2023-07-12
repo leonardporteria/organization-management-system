@@ -37,3 +37,10 @@
 .required::after {
   content: '*';
 }
+
+.auto-fill {
+  > input {
+    cursor: not-allowed;
+    color: $neutral-400;
+  }
+}

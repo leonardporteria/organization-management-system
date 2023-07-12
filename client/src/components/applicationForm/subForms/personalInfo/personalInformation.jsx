@@ -33,6 +33,19 @@ const PersonalInformation = ({ onInputChange }) => {
     email: '',
   });
 
+  const [selectedCivilStatus, setSelectedCivilStatus] = useState('');
+  const [selectedSex, setSelectedSex] = useState('');
+
+  const handleCivilStatusChange = (e) => {
+    const civilStatus = e.target.value;
+    setSelectedCivilStatus(civilStatus);
+  };
+
+  const handleSexChange = (e) => {
+    const sex = e.target.value;
+    setSelectedSex(sex);
+  };
+
   const handlePersonalData = (event, name) => {
     setPersonalData((prevPersonalData) => ({
       ...prevPersonalData,
@@ -112,12 +125,19 @@ const PersonalInformation = ({ onInputChange }) => {
         </label>
         <label>
           <p>Civil Status:</p>
-          <input
-            type='text'
-            onBlur={(e) => {
+          <select
+            value={selectedCivilStatus}
+            onChange={(e) => {
               handlePersonalData(e, 'civil_status');
+              handleCivilStatusChange(e);
             }}
-          />
+          >
+            <option value=''>Select Civil Status</option>
+            <option value='SIN'>Single</option>
+            <option value='MAR'>Married</option>
+            <option value='WID'>Widowed</option>
+            <option value='SEP'>Separated</option>
+          </select>
         </label>
       </div>
 
@@ -142,12 +162,17 @@ const PersonalInformation = ({ onInputChange }) => {
         </label>
         <label>
           <p>Sex</p>
-          <input
-            type='text'
-            onBlur={(e) => {
+          <select
+            value={selectedSex}
+            onChange={(e) => {
               handlePersonalData(e, 'sex');
+              handleSexChange(e);
             }}
-          />
+          >
+            <option value=''>Select Sex</option>
+            <option value='M'>Male</option>
+            <option value='F'>Female</option>
+          </select>
         </label>
       </div>
 
