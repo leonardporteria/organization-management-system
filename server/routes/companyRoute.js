@@ -44,7 +44,7 @@ companyRouter.post('/company', async (req, res) => {
   const companyAttributes = Object.keys(companyInformation);
   const companyValues = Object.values(companyInformation);
 
-  console.log('COMPANY CODE:', companyCode);
+  console.log('COMPANY:', companyInformation);
 
   await insertIntoTable('company', companyAttributes, companyValues);
 

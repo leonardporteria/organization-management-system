@@ -22,7 +22,7 @@ const SponsorInformation = ({ onInputChange }) => {
       });
       const responseData = await response.json();
 
-      const memberData = responseData.members.map((member) => ({
+      const memberData = responseData.data.map((member) => ({
         member_id: member.member_id,
         member_name: member.member_name,
       }));

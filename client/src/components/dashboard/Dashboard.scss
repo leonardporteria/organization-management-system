@@ -1,0 +1,83 @@
+@import '../../variables.scss';
+
+.Dashboard__Header {
+  > h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: $neutral-200;
+  }
+}
+
+.Dashboard__Section {
+  padding: 2rem;
+  background-color: $neutral-800;
+  border-radius: 1rem;
+
+  display: grid;
+  gap: 2rem;
+}
+
+.Dashboard__Form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  > label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+  }
+}
+
+.Dashboard__Button {
+  justify-self: center;
+  cursor: pointer;
+  width: 10rem;
+  height: 2rem;
+  background-color: $green-800;
+  border: none;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > h1 {
+    color: white;
+    font-size: 0.75rem;
+  }
+}
+
+.Dashboard__Starting {
+  width: 100%;
+}
+
+.Dashboard__Add {
+  width: 100%;
+}
+
+.Dashboard__Update {
+  width: 100%;
+}
+
+.Dashboard__Change {
+  width: 100%;
+}
+.Dashboard__Tables {
+  width: 100%;
+
+  &__Applicaiton {
+    overflow-x: auto;
+    border: 2px solid $neutral-900;
+    &__Table {
+      width: auto;
+
+      > table,
+      th,
+      td {
+        padding: 0.5rem;
+        border-collapse: collapse;
+        width: 100vw;
+        border: 1px solid $neutral-700;
+      }
+    }
+  }
+}

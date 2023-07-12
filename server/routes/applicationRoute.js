@@ -31,8 +31,10 @@ applicationRouter.post('/application', async (req, res) => {
   // ID GENERATION
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
-  const member_id = generateMemberId((uid - 1).toString());
+  const member_id = generateMemberId(uid.toString());
   req.body.member_information.member_id = member_id;
+
+  console.log('MEMBER ID', member_id);
 
   // console.log(req.body.organization_club);
   // console.log(req.body.education);

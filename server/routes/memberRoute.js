@@ -3,6 +3,10 @@ const memberRouter = express.Router();
 
 // utils import
 import { generateMemberId } from '../utils/memberIdGenerator.js';
+import {
+  generateCompanyCode,
+  concatenateCompanyCode,
+} from '../utils/companyCodeGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
 import { selectFromTable } from '../schema/select/selectTable.js';
 
@@ -31,6 +35,13 @@ memberRouter.post('/member', async (req, res) => {
   const member_id = generateMemberId(uid.toString());
   req.body.member_information.member_id = member_id;
 
+  // COMPANY CODE GENERATION
+  const company_id = generateCompanyCode(uid.toString());
+
+  // company
+  const companyCode = concatenateCompanyCode(company_id, 'W', '0');
+  req.body.member_information.company_code = companyCode;
+
   // QUERY TO DATABASE
   const {
     last_name,
@@ -54,8 +65,6 @@ memberRouter.post('/member', async (req, res) => {
 
   const memberAttributes = Object.keys(memberInformation);
   const memberValues = Object.values(memberInformation);
-  console.log('Member Info');
-  console.log(memberInformation);
 
   insertIntoTable('member_information', memberAttributes, memberValues);
 

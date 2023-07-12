@@ -5,10 +5,10 @@ import './employmentInformation.scss';
 const EmployeeInformation = ({ onInputChange }) => {
   const [employmentData, setEmploymentData] = useState({
     work_title_or_position: '',
-    company_name: '',
     company_telephone: '',
     company_email: '',
     company_address: '',
+    company_name: '',
   });
 
   const handleEmploymentData = (event, name) => {

@@ -57,7 +57,7 @@ const OrganizationInformation = ({ onInputChange }) => {
       });
       const responseData = await response.json();
 
-      const availableRegions = responseData.organization.reduce((acc, club) => {
+      const availableRegions = responseData.data.reduce((acc, club) => {
         const {
           club_id,
           club_region,
