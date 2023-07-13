@@ -12,6 +12,8 @@ queryRouter.get('/query', async (req, res) => {
   res.json({ message: 'GET all query' });
 });
 
+// UPDATE MEMBERSHIP STATUS
+// check membership status
 queryRouter.get('/query/status/:member_id/:club_id', async (req, res) => {
   const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
   const query = `
@@ -30,6 +32,22 @@ queryRouter.get('/query/status/:member_id/:club_id', async (req, res) => {
     data: rows,
     query: query,
   });
+});
+// change membership status
+queryRouter.post('/query/status/:member_id/:club_id', async (req, res) => {
+  console.log(req.body.data);
+  const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
+  const query = `
+    UPDATE application_details
+    SET application_status = "${req.body.data}"
+    WHERE member_id = "${req.params.member_id}" 
+    AND club_id = "${req.params.club_id}";
+      `;
+
+  await pool.query(useQuery);
+  const [rows] = await pool.query(query);
+
+  res.json({ message: 'POST one status', data: rows, query: query });
 });
 
 // GET one query by id
@@ -60,23 +78,6 @@ queryRouter.post('/query', async (req, res) => {
   res.json({
     message: 'POST new query',
   });
-});
-
-// POST new query (CHANGE APPLICATION STATUS)
-queryRouter.post('/query/status/:member_id/:club_id', async (req, res) => {
-  console.log(req.body.data);
-  const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
-  const query = `
-    UPDATE application_details
-    SET application_status = "${req.body.data}"
-    WHERE member_id = "${req.params.member_id}" 
-    AND club_id = "${req.params.club_id}";
-      `;
-
-  await pool.query(useQuery);
-  const [rows] = await pool.query(query);
-
-  res.json({ message: 'POST one status', data: rows, query: query });
 });
 
 // UPDATE one query by id

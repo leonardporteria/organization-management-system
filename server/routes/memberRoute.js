@@ -36,11 +36,20 @@ memberRouter.post('/member', async (req, res) => {
   req.body.member_information.member_id = member_id;
 
   // COMPANY CODE GENERATION
-  const company_id = generateCompanyCode(uid.toString());
-
-  // company
-  const companyCode = concatenateCompanyCode(company_id, 'W', '0');
-  req.body.member_information.company_code = companyCode;
+  // set to null if no value
+  if (
+    req.body.company.company_name !== '' ||
+    req.body.company.company_email !== '' ||
+    req.body.company.company_address !== '' ||
+    req.body.company.company_telephone !== ''
+  ) {
+    const company_id = generateCompanyCode(uid.toString());
+    const companyCode = concatenateCompanyCode(company_id, 'W', '0');
+    req.body.member_information.company_code = companyCode;
+  } else {
+    req.body.member_information.company_code = null;
+    req.body.member_information.work_title_or_position = null;
+  }
 
   // QUERY TO DATABASE
   const {

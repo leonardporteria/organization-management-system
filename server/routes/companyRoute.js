@@ -27,6 +27,16 @@ companyRouter.get('/company/:id', (req, res) => {
 });
 // POST new company
 companyRouter.post('/company', async (req, res) => {
+  if (
+    req.body.company.company_name === '' ||
+    req.body.company.company_email === '' ||
+    req.body.company.company_address === '' ||
+    req.body.company.company_telephone === ''
+  )
+    res.json({
+      message: 'NO COMPANY INFO',
+    });
+
   // ID GENERATION
   const applicantToday = await getApplicationsToday();
   const [uid] = Object.values(applicantToday[0]);
