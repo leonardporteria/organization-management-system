@@ -31,7 +31,7 @@ const AdminDashboard = () => {
 
   // CHANGE APPLICANT'S MEMBERSHIP STATUS
   const [changeMemberName, setChangeMemberName] = useState('');
-  const [changeMembeID, setChangeMembeID] = useState('');
+  const [changeMemberID, setChangeMemberID] = useState('');
   const handleMemberIDChange = (event) => {
     const inputMemberId = event.target.value;
     const memberExists = memberData.some(
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
       (member) => member.member_id === inputMemberId
     );
     setChangeMemberName(matchedMember.member_name);
-    setChangeMembeID(inputMemberId);
+    setChangeMemberID(inputMemberId);
     setChangeMemberStatus('');
   };
 
@@ -68,14 +68,42 @@ const AdminDashboard = () => {
     setChangeMemberStatus('');
   };
 
+  const [selectedMemberStatus, setSelectedMemberStatus] = useState('');
+  const handleMemberStatusChange = (e) => {
+    const memberStatus = e.target.value;
+    setSelectedMemberStatus(memberStatus);
+  };
+
   const [changeMemberStatus, setChangeMemberStatus] = useState('');
   const handleFindMemberStatus = async () => {
     const memberStatus = await getDataFromDatabase(
-      `/query/status/${changeMembeID}/${changeClubID}`
+      `/query/status/${changeMemberID}/${changeClubID}`
     );
     setChangeMemberStatus(memberStatus[0].application_status);
   };
-  const handleChangeMemberStatus = () => {};
+
+  const handleChangeMemberStatus = async (path, data) => {
+    console.log(path);
+    console.log(data);
+    const URL = 'http://localhost:5173/api' + path;
+
+    try {
+      const response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: data }),
+      });
+
+      const res = await response.json();
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.error(`Error in ${path}:`, error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -175,7 +203,21 @@ const AdminDashboard = () => {
           </label>
           <label>
             <p>New Membership Status:</p>
-            <input type='text' />
+            <select
+              value={selectedMemberStatus}
+              onChange={(e) => {
+                handleMemberStatusChange(e);
+              }}
+            >
+              <option value=''>Select Application Status</option>
+              <option value='Active'>Active</option>
+              <option value='Cancelled'>Cancelled</option>
+              <option value='Pending'>Pending</option>
+              <option value='Expired'>Expired</option>
+              <option value='Suspended'>Suspended</option>
+              <option value='Defaulted'>Defaulted</option>
+              <option value='Revoked'>Revoked</option>
+            </select>
           </label>
         </div>
 
@@ -188,7 +230,12 @@ const AdminDashboard = () => {
           </div>
           <div
             className='Admin__Button Admin__Update__Buttons__Confirm'
-            onClick={handleChangeMemberStatus}
+            onClick={() => {
+              handleChangeMemberStatus(
+                `/query/status/${changeMemberID}/${changeClubID}`,
+                selectedMemberStatus
+              );
+            }}
           >
             <h1>Confirm</h1>
           </div>
