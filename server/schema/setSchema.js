@@ -20,7 +20,7 @@ const createCompanyTable = async () => {
         company_name varchar(50) NOT NULL,	
         company_telephone varchar(10) NOT NULL,	
         company_email varchar(50) NOT NULL,	
-        company_address varchar(50) NOT NULL
+        company_address varchar(150) NOT NULL
     );
     `;
   await pool.query(query);
@@ -30,8 +30,8 @@ const createEducationTable = async () => {
   const query = `
   CREATE TABLE IF NOT EXISTS EDUCATION(
 	education_id char(12) PRIMARY KEY,
-    education_level varchar(20) NOT NULL,	
-	school_name varchar(50) NOT NULL,	
+  education_level varchar(20) NOT NULL,	
+	school_name varchar(100) NOT NULL,	
 	date_graduated date NOT NULL,	
 	course_strand varchar(50) NOT NULL
 );
@@ -43,7 +43,7 @@ const createDependentsTable = async () => {
   const query = `
   CREATE TABLE IF NOT EXISTS LEGAL_DEPENDENTS(
 	dependent_id char(12) PRIMARY KEY,
-    dependent_name varchar(50) NOT NULL,	
+  dependent_name varchar(50) NOT NULL,	
 	dependent_date_of_birth date NOT NULL,	
 	dependent_contact_number char(11) NOT NULL,	
 	dependent_relationship varchar(15) NOT NULL
@@ -56,9 +56,9 @@ const createContactTable = async () => {
   const query = `
   CREATE TABLE IF NOT EXISTS CONTACT_PERSON(
 	contact_id char(12) PRIMARY KEY,
-    contact_name varchar(50) NOT NULL,	
+  contact_name varchar(50) NOT NULL,	
 	contact_cellphone_number char(11) NOT NULL,	
-    contact_address varchar(50) NOT NULL,
+  contact_address varchar(150) NOT NULL,
 	contact_relationship varchar(15) NOT NULL
 );
       `;
@@ -72,7 +72,7 @@ const createMemberTable = async () => {
     member_name varchar(50) NOT NULL,
     place_of_birth varchar(50) NOT NULL,
     date_of_birth date NOT NULL,	
-    address varchar(50) NOT NULL,
+    address varchar(150) NOT NULL,
     age	int(2) CHECK (age >= 15 AND age <= 65),
     sex	char(1) NOT NULL,
     heigh_in_cm	decimal(5,2) NOT NULL,
@@ -87,7 +87,7 @@ const createMemberTable = async () => {
     email varchar(50) NOT NULL,
     sponsor_name varchar(50),
     sponsor_membership_id char(9),
-    work_title_or_position varchar(20),
+    work_title_or_position varchar(50),
     company_code char(9),
     
     foreign key(sponsor_membership_id) references MEMBER_INFORMATION(member_id),

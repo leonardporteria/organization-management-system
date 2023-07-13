@@ -220,6 +220,26 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAddStartingValues = async () => {
+    const URL = 'http://localhost:5173/api/query/add/initialzie';
+
+    try {
+      const response = await fetch(URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const res = await response.json();
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.error(`Error in ${path}:`, error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -269,7 +289,10 @@ const AdminDashboard = () => {
       <div className='Admin__Section Admin__Starting'>
         <h1>Add Starting Values</h1>
 
-        <div className='Admin__Button Admin__Starting__Button'>
+        <div
+          className='Admin__Button Admin__Starting__Button'
+          onClick={handleAddStartingValues}
+        >
           <h1>Add Starting Values</h1>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import express from 'express';
 import { pool } from '../config/database.js';
+import { setStartingValues } from '../schema/insert/insertStartingValues.js';
 import dotenv from 'dotenv';
 dotenv.config();
+
 const queryRouter = express.Router();
 
 import { generateClubId } from '../utils/clubIdGenerator.js';
@@ -14,6 +16,16 @@ import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 // GET all query
 queryRouter.get('/query', async (req, res) => {
   res.json({ message: 'GET all query' });
+});
+
+// SETUP STARTING VALUES
+// check membership status
+queryRouter.get('/query/add/initialzie', async (req, res) => {
+  await setStartingValues();
+
+  res.json({
+    message: 'SET staring values',
+  });
 });
 
 // UPDATE MEMBERSHIP STATUS
