@@ -1,8 +1,12 @@
 import express from 'express';
-const queryRouter = express.Router();
 import { pool } from '../config/database.js';
 import dotenv from 'dotenv';
 dotenv.config();
+const queryRouter = express.Router();
+
+import { generateClubId } from '../utils/clubIdGenerator.js';
+import { getApplicationsToday } from '../schema/select/selectMember.js';
+import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
 
 /**
  * ROOT PATH: /api
@@ -50,6 +54,34 @@ queryRouter.post('/query/status/:member_id/:club_id', async (req, res) => {
   res.json({ message: 'POST one status', data: rows, query: query });
 });
 
+// ADD NEW ORGANIZATION
+// change membership status
+queryRouter.post('/query/add/organization', async (req, res) => {
+  console.log(req.body);
+
+  // ID GENERATION
+  const applicantToday = await getApplicationsToday();
+  const [uid] = Object.values(applicantToday[0]);
+  const clubId = generateClubId(uid.toString());
+  req.body.club_id = clubId;
+  console.log(clubId);
+  // organizaiton
+  // QUERY TO DATABASE (ORGANIZATION TABLE)
+  const { club_id, ...rest } = req.body;
+  const clubInformation = { ...rest, club_id };
+  const clubAttributes = Object.keys(clubInformation);
+  const clubValues = Object.values(clubInformation);
+  console.log('CLUB ID:', clubId);
+  const rows = await insertIntoTable(
+    'organization_club',
+    clubAttributes,
+    clubValues
+  );
+
+  res.json({ message: 'POST one new club', data: rows });
+});
+
+// 15 QUERIES
 // GET one query by id
 queryRouter.get('/query/:id', async (req, res) => {
   // PARAM 1
@@ -71,23 +103,6 @@ queryRouter.get('/query/:id', async (req, res) => {
       query: query,
     });
   }
-});
-
-// POST new query
-queryRouter.post('/query', async (req, res) => {
-  res.json({
-    message: 'POST new query',
-  });
-});
-
-// UPDATE one query by id
-queryRouter.delete('/query/:id', (req, res) => {
-  res.json({ message: 'DELETE one query' });
-});
-
-// DELETE one query by id
-queryRouter.patch('/query/:id', (req, res) => {
-  res.json({ message: 'UPDATE one query' });
 });
 
 export default queryRouter;

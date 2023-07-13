@@ -2,10 +2,6 @@ import express from 'express';
 const organizationRouter = express.Router();
 
 // utils import
-import {
-  generateMemberId,
-  concatenateMemberId,
-} from '../utils/memberIdGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
 import { selectFromTable } from '../schema/select/selectTable.js';
 import { generateClubId } from '../utils/clubIdGenerator.js';

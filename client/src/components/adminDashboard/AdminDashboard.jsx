@@ -105,6 +105,56 @@ const AdminDashboard = () => {
     }
   };
 
+  // ADD NEW ORGANIZATION
+  const [addMemberName, setAddMemberName] = useState('');
+  const [addMemberID, setAddMemberID] = useState('');
+  const handleMemberIDAdd = (event) => {
+    const inputMemberId = event.target.value;
+    const memberExists = memberData.some(
+      (member) => member.member_id === inputMemberId
+    );
+    if (!memberExists) {
+      setAddMemberName('');
+      return;
+    }
+    const matchedMember = memberData.find(
+      (member) => member.member_id === inputMemberId
+    );
+    setAddMemberName(matchedMember.member_name);
+    setAddMemberID(inputMemberId);
+  };
+
+  const [addClubRegion, setAddClubRegion] = useState('');
+  const [addClubName, setAddClubName] = useState('');
+  const handleClubRegionChange = (e) => {
+    setAddClubRegion(() => e.target.value);
+  };
+  const handleClubNameChange = (e) => {
+    setAddClubName(() => e.target.value);
+  };
+
+  const handleAddNewOrganization = async (path, data) => {
+    // console.log(data);
+    const URL = 'http://localhost:5173/api' + path;
+
+    try {
+      const response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const res = await response.json();
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.error(`Error in ${path}:`, error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -247,23 +297,38 @@ const AdminDashboard = () => {
         <div className='Admin__Form Admin__Add__Form'>
           <label>
             <p>Club Region:</p>
-            <input type='text' />
+            <input type='text' onChange={handleClubRegionChange} />
           </label>
           <label>
             <p>Club Name:</p>
-            <input type='text' />
+            <input type='text' onChange={handleClubNameChange} />
           </label>
           <label>
-            <p>Club President ID:</p>
-            <input type='text' />
+            <p>Enter Faciliator Member ID:</p>
+            <input
+              type='text'
+              onChange={(e) => {
+                handleMemberIDAdd(e);
+              }}
+            />
           </label>
-          <label>
-            <p>Club President Name:</p>
-            <input type='text' />
+          <label className='auto-fill'>
+            <p>Member Name:</p>
+            <input type='text' defaultValue={addMemberName} disabled={true} />
           </label>
         </div>
 
-        <div className='Admin__Button Admin__Add__Button'>
+        <div
+          className='Admin__Button Admin__Add__Button'
+          onClick={() => {
+            handleAddNewOrganization(`/query/add/organization`, {
+              club_president_member_id: addMemberID,
+              club_president: addMemberName,
+              club_region: addClubRegion,
+              club_name: addClubName,
+            });
+          }}
+        >
           <h1>Add New Club</h1>
         </div>
       </div>

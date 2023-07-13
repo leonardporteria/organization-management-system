@@ -18,6 +18,5 @@ export const getApplicationsToday = async () => {
 
   await pool.query(useQuery);
   const [rows] = await pool.query(query);
-  console.log('ROWS', rows);
   return rows;
 };
