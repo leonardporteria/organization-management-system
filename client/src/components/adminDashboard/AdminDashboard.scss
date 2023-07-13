@@ -56,6 +56,16 @@
 
 .Admin__Update {
   width: 100%;
+  &__Form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &__Buttons {
+    display: flex;
+    gap: 2rem;
+    &__Check {
+      background-color: $amber-700;
+    }
+  }
 }
 
 .Admin__Change {

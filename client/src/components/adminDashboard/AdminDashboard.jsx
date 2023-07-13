@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const [educationData, setEducationData] = useState([]);
   const [dependentData, setDependentData] = useState([]);
 
-  const getDataFromDatabase = async (path, stateVariable) => {
+  const getDataFromDatabase = async (path) => {
     const URL = 'http://localhost:5173/api' + path;
 
     try {
@@ -28,6 +28,54 @@ const AdminDashboard = () => {
       console.error(`Error in ${URL}:`, error);
     }
   };
+
+  // CHANGE APPLICANT'S MEMBERSHIP STATUS
+  const [changeMemberName, setChangeMemberName] = useState('');
+  const [changeMembeID, setChangeMembeID] = useState('');
+  const handleMemberIDChange = (event) => {
+    const inputMemberId = event.target.value;
+    const memberExists = memberData.some(
+      (member) => member.member_id === inputMemberId
+    );
+    if (!memberExists) {
+      setChangeMemberName('');
+      return;
+    }
+    const matchedMember = memberData.find(
+      (member) => member.member_id === inputMemberId
+    );
+    setChangeMemberName(matchedMember.member_name);
+    setChangeMembeID(inputMemberId);
+    setChangeMemberStatus('');
+  };
+
+  const [changeClubName, setChangeClubName] = useState('');
+  const [changeClubID, setChangeClubID] = useState('');
+  const handleClubIDChange = (event) => {
+    const inputClubId = event.target.value;
+    const clubExists = organizationData.some(
+      (club) => club.club_id === inputClubId
+    );
+    if (!clubExists) {
+      setChangeClubName('');
+      return;
+    }
+    const matchedClub = organizationData.find(
+      (club) => club.club_id === inputClubId
+    );
+    setChangeClubName(matchedClub.club_name);
+    setChangeClubID(inputClubId);
+    setChangeMemberStatus('');
+  };
+
+  const [changeMemberStatus, setChangeMemberStatus] = useState('');
+  const handleFindMemberStatus = async () => {
+    const memberStatus = await getDataFromDatabase(
+      `/query/status/${changeMembeID}/${changeClubID}`
+    );
+    setChangeMemberStatus(memberStatus[0].application_status);
+  };
+  const handleChangeMemberStatus = () => {};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,6 +131,70 @@ const AdminDashboard = () => {
         </div>
       </div>
 
+      <div className='Admin__Section Admin__Update'>
+        <h1>Update Applicant's Membership Status</h1>
+        <div className='Admin__Form Admin__Update__Form'>
+          <label>
+            <p>Enter Member ID:</p>
+            <input
+              type='text'
+              onChange={(e) => {
+                handleMemberIDChange(e);
+              }}
+            />
+          </label>
+          <label className='auto-fill'>
+            <p>Member Name:</p>
+            <input
+              type='text'
+              defaultValue={changeMemberName}
+              disabled={true}
+            />
+          </label>
+          <label>
+            <p>Enter Club ID</p>
+            <input
+              type='text'
+              onChange={(e) => {
+                handleClubIDChange(e);
+              }}
+            />
+          </label>
+          <label className='auto-fill'>
+            <p>Club Name:</p>
+            <input type='text' defaultValue={changeClubName} disabled={true} />
+          </label>
+
+          <label className='auto-fill'>
+            <p>Current Membership Status:</p>
+            <input
+              type='text'
+              defaultValue={changeMemberStatus}
+              disabled={true}
+            />
+          </label>
+          <label>
+            <p>New Membership Status:</p>
+            <input type='text' />
+          </label>
+        </div>
+
+        <div className='Admin__Update__Buttons'>
+          <div
+            className='Admin__Button Admin__Update__Buttons__Check'
+            onClick={handleFindMemberStatus}
+          >
+            <h1>Check</h1>
+          </div>
+          <div
+            className='Admin__Button Admin__Update__Buttons__Confirm'
+            onClick={handleChangeMemberStatus}
+          >
+            <h1>Confirm</h1>
+          </div>
+        </div>
+      </div>
+
       <div className='Admin__Section Admin__Add'>
         <h1>Add a new Organization</h1>
         <div className='Admin__Form Admin__Add__Form'>
@@ -106,41 +218,6 @@ const AdminDashboard = () => {
 
         <div className='Admin__Button Admin__Add__Button'>
           <h1>Add New Club</h1>
-        </div>
-      </div>
-
-      <div className='Admin__Section Admin__Update'>
-        <h1>Update Applicant's Membership Status</h1>
-        <div className='Admin__Form Admin__Update__Form'>
-          <label>
-            <p>Enter Member ID:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>Member Name:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>Club Region:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>Club Name:</p>
-            <input type='text' />
-          </label>
-
-          <label>
-            <p>Date of Application:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>Membership Status:</p>
-            <input type='text' />
-          </label>
-        </div>
-
-        <div className='Admin__Button Admin__Update__Button'>
-          <h1>Confirm</h1>
         </div>
       </div>
 

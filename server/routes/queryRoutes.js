@@ -7,9 +7,30 @@ dotenv.config();
 /**
  * ROOT PATH: /api
  */
-// GET all company
+// GET all query
 queryRouter.get('/query', async (req, res) => {
   res.json({ message: 'GET all query' });
+});
+
+queryRouter.get('/query/status/:member_id/:club_id', async (req, res) => {
+  const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
+  const query = `
+    SELECT application_status
+    FROM application_details
+    WHERE member_id = "${req.params.member_id}" 
+    AND club_id = "${req.params.club_id}"
+    LIMIT 1;
+      `;
+
+  await pool.query(useQuery);
+  const [rows] = await pool.query(query);
+  res.json({
+    message: 'GET one query',
+    params: req.params.id,
+    data: rows,
+    query: query,
+  });
+  res.json({ message: 'GET all status', data: rows, query: query });
 });
 
 // GET one query by id
@@ -21,7 +42,7 @@ queryRouter.get('/query/:id', async (req, res) => {
       SELECT civil_status, count(sex) as sexCounter 
       FROM member_information
       WHERE sex = 'm'
-      GROUP BY civil_status
+      GROUP BY civil_status 
         `;
 
     await pool.query(useQuery);
