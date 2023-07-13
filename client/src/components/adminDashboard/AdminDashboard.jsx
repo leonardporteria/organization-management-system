@@ -155,6 +155,71 @@ const AdminDashboard = () => {
     }
   };
 
+  // APPLY TO A NEW CLUB
+  const [updateMemberName, setUpdateMemberName] = useState('');
+  const [updateMemberID, setUpdateMemberID] = useState('');
+  const handleMemberIDUpdate = (event) => {
+    const inputMemberId = event.target.value;
+    const memberExists = memberData.some(
+      (member) => member.member_id === inputMemberId
+    );
+    if (!memberExists) {
+      setUpdateMemberName('');
+      return;
+    }
+    const matchedMember = memberData.find(
+      (member) => member.member_id === inputMemberId
+    );
+    setUpdateMemberName(matchedMember.member_name);
+    setUpdateMemberID(inputMemberId);
+  };
+
+  const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedClub, setSelectedClub] = useState('');
+  const [selectedClubID, setSelectedClubID] = useState('');
+
+  const handleRegionChange = (event) => {
+    setSelectedRegion(event.target.value);
+    setSelectedClub('');
+    setSelectedClubID('');
+  };
+
+  const handleClubChange = (event) => {
+    const selectedClubId = event.target.value;
+    setSelectedClub(selectedClubId);
+
+    const club = organizationData.find(
+      (data) => data.club_id === selectedClubId
+    );
+
+    setSelectedClubID(club ? club.club_id : '');
+  };
+
+  const filteredClubs = organizationData.filter(
+    (data) => data.club_region === selectedRegion
+  );
+
+  const handleUpdateMemberOrganization = async (path, data) => {
+    const URL = 'http://localhost:5173/api' + path;
+
+    try {
+      const response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const res = await response.json();
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.error(`Error in ${path}:`, error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -338,35 +403,54 @@ const AdminDashboard = () => {
         <div className='Admin__Form Admin__Change__Form'>
           <label>
             <p>Enter Member ID:</p>
-            <input type='text' />
+            <input type='text' onChange={handleMemberIDUpdate} />
           </label>
-          <label>
+          <label className='auto-fill'>
             <p>Member Name:</p>
-            <input type='text' />
+            <input
+              type='text'
+              defaultValue={updateMemberName}
+              disabled={true}
+            />
           </label>
           <label>
-            <p>Current Club Region:</p>
-            <input type='text' />
+            <p>Select Region</p>
+            <select value={selectedRegion} onChange={handleRegionChange}>
+              <option value=''>Select Region</option>
+              {Array.from(
+                new Set(organizationData.map((data) => data.club_region))
+              ).map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
           </label>
+
           <label>
-            <p>Current Club Name:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>New Club Region:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>New Club Name:</p>
-            <input type='text' />
-          </label>
-          <label>
-            <p>Date of Application:</p>
-            <input type='date' />
+            <p>Select Club:</p>
+            <select value={selectedClub} onChange={handleClubChange}>
+              <option value=''>Select Club</option>
+              {filteredClubs.map((club) => {
+                return (
+                  <option key={club.club_id} value={club.club_id}>
+                    {club.club_name}
+                  </option>
+                );
+              })}
+            </select>
           </label>
         </div>
 
-        <div className='Admin__Button Admin__Change__Button'>
+        <div
+          className='Admin__Button Admin__Change__Button'
+          onClick={() => {
+            handleUpdateMemberOrganization(`/query/update/organization`, {
+              member_id: updateMemberID,
+              club_id: selectedClubID,
+            });
+          }}
+        >
           <h1>Confirm</h1>
         </div>
       </div>

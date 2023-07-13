@@ -39,6 +39,7 @@
 }
 
 .auto-fill {
+  color: $neutral-400;
   > input {
     cursor: not-allowed;
     color: $neutral-400;

@@ -81,6 +81,24 @@ queryRouter.post('/query/add/organization', async (req, res) => {
   res.json({ message: 'POST one new club', data: rows });
 });
 
+// CHANGE MEMBER ORGANIZATION
+// change membership status
+queryRouter.post('/query/update/organization', async (req, res) => {
+  console.log(req.body);
+  const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
+  const query = `
+  INSERT INTO application_details (member_id, club_id, education_id, dependent_id, contact_id, application_status, date_of_application)
+  SELECT member_id, '${req.body.club_id}', education_id, dependent_id, contact_id, 'Pending', CURDATE()
+  FROM application_details
+  WHERE member_id = '${req.body.member_id}';
+      `;
+
+  await pool.query(useQuery);
+  const [rows] = await pool.query(query);
+
+  res.json({ message: 'POST new application', data: rows });
+});
+
 // 15 QUERIES
 // GET one query by id
 queryRouter.get('/query/:id', async (req, res) => {

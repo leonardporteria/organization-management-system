@@ -47,6 +47,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
+
+      <div className='App__Footer'></div>
     </div>
   );
 }

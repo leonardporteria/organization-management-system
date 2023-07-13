@@ -82,6 +82,21 @@
 
 .Admin__Change {
   width: 100%;
+  &__Form {
+    grid-template-columns: repeat(2, 1fr);
+    > label {
+      > select {
+        cursor: pointer;
+        background-color: $neutral-900;
+        border: 0;
+        border-radius: 0.2rem;
+        font-family: 'Montserrat', sans-serif;
+        color: $neutral-50;
+        padding: 0.44rem;
+        min-width: 15rem;
+      }
+    }
+  }
 }
 .Admin__Tables {
   width: 100%;
