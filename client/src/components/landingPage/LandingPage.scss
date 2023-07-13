@@ -1,0 +1,23 @@
+@import '../../variables';
+
+.Header {
+  > h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+.Hero {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  &__About {
+    > p {
+      max-width: 70%;
+      line-height: 2.5;
+    }
+  }
+  &__Rules {
+    max-width: 70%;
+    line-height: 2.5;
+  }
+}

@@ -48,7 +48,14 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-      <div className='App__Footer'></div>
+      <div className='App__Footer'>
+        <h1>Organization Management System</h1>
+        <p>
+          In partial fulfillment for the course COMP 20093 - Information
+          Management
+        </p>
+        <p>July 2023 || BSIT 2-1 [A.Y. 2022-23]</p>
+      </div>
     </div>
   );
 }
