@@ -75,7 +75,7 @@ const createMemberTable = async () => {
     address varchar(150) NOT NULL,
     age	int(2) CHECK (age >= 15 AND age <= 65),
     sex	char(1) NOT NULL,
-    heigh_in_cm	decimal(5,2) NOT NULL,
+    height_in_cm	decimal(5,2) NOT NULL,
     weight_in_kg decimal(5,2) NOT NULL,
     bmi	decimal	(6,4),
     civil_status varchar(8) NOT NULL,

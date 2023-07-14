@@ -29,7 +29,7 @@ const SponsorInformation = ({ onInputChange }) => {
 
       setAvailableMember((prevMemberData) => memberData);
 
-      console.log(availableMember);
+      //  console.log(availableMember);
     } catch (error) {
       console.error(`Error in ${memberURL}:`, error);
     }

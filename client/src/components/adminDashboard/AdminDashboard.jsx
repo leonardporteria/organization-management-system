@@ -274,8 +274,6 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-
-    console.log('Admin Dashboard');
   }, []);
 
   return (

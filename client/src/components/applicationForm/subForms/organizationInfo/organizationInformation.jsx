@@ -77,7 +77,7 @@ const OrganizationInformation = ({ onInputChange }) => {
         return acc;
       }, {});
 
-      console.log(availableRegions);
+      //  console.log(availableRegions);
       setAvailableClubs(() => availableRegions);
     } catch (error) {
       console.error(`Error in ${organizationURL}:`, error);
@@ -95,7 +95,7 @@ const OrganizationInformation = ({ onInputChange }) => {
   };
 
   useEffect(() => {
-    console.log(clubData);
+    // console.log(clubData);
     if (!isDateInitialized) {
       setClubData((prevClubData) => ({
         ...prevClubData,

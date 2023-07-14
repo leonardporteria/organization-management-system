@@ -6,6 +6,8 @@ dotenv.config();
 
 const queryRouter = express.Router();
 
+import { queryAnswers } from '../schema/queries.js';
+
 import { generateClubId } from '../utils/clubIdGenerator.js';
 import { getApplicationsToday } from '../schema/select/selectMember.js';
 import { insertIntoTable } from '../schema/insert/insertIntoTable.js';
@@ -21,7 +23,13 @@ queryRouter.get('/query', async (req, res) => {
 // SETUP STARTING VALUES
 // check membership status
 queryRouter.get('/query/add/initialzie', async (req, res) => {
-  await setStartingValues();
+  try {
+    await setStartingValues();
+  } catch (e) {
+    res.json({
+      err: e,
+    });
+  }
 
   res.json({
     message: 'SET staring values',
@@ -113,9 +121,9 @@ queryRouter.post('/query/update/organization', async (req, res) => {
 
 // 15 QUERIES
 // GET one query by id
-queryRouter.get('/query/:id', async (req, res) => {
+queryRouter.get('/query/:difficulty/:number', async (req, res) => {
   // PARAM 1
-  if (req.params.id === '1') {
+  if (req.params.difficulty === 'easy' && req.params.number === '1') {
     const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
     const query = `
       SELECT civil_status, count(sex) as sexCounter 
