@@ -12,7 +12,7 @@ const PersonalInformation = ({ onInputChange }) => {
     // ===
     place_of_birth: '',
     date_of_birth: '',
-    heigh_in_cm: '',
+    height_in_cm: '',
     weight_in_kg: '',
     sex: '',
     // address
@@ -147,7 +147,7 @@ const PersonalInformation = ({ onInputChange }) => {
           <input
             type='number'
             onBlur={(e) => {
-              handlePersonalData(e, 'heigh_in_cm');
+              handlePersonalData(e, 'height_in_cm');
             }}
           />
         </label>
