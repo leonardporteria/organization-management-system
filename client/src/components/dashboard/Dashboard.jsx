@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import './Dashboard.scss';
 
@@ -108,14 +108,6 @@ const Dashboard = () => {
     ],
   };
 
-  const [applicationData, setApplicationData] = useState([]);
-  const [memberData, setMemberData] = useState([]);
-  const [organizationData, setOrganizationData] = useState([]);
-  const [companyData, setCompanyData] = useState([]);
-  const [contactData, setContactData] = useState([]);
-  const [educationData, setEducationData] = useState([]);
-  const [dependentData, setDependentData] = useState([]);
-
   const [queryResult, setQueryResult] = useState([]);
 
   const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
@@ -133,24 +125,6 @@ const Dashboard = () => {
   };
 
   const problems = queryProblems[selectedDifficulty];
-
-  const getDataFromDatabase = async (path, stateVariable) => {
-    const URL = 'http://localhost:5173/api' + path;
-
-    try {
-      const response = await fetch(URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const responseData = await response.json();
-
-      return responseData.data;
-    } catch (error) {
-      console.error(`Error in ${URL}:`, error);
-    }
-  };
 
   const getResultFromQuery = async (params) => {
     const URL = 'http://localhost:5173/api/query/' + params;
@@ -178,43 +152,6 @@ const Dashboard = () => {
     console.log(queryResult);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          applicationData,
-          memberData,
-          organizationData,
-          companyData,
-          contactData,
-          educationData,
-          dependentData,
-        ] = await Promise.all([
-          getDataFromDatabase('/application'),
-          getDataFromDatabase('/member'),
-          getDataFromDatabase('/organization'),
-          getDataFromDatabase('/company'),
-          getDataFromDatabase('/contact'),
-          getDataFromDatabase('/education'),
-          getDataFromDatabase('/legalDependent'),
-        ]);
-
-        setApplicationData(applicationData);
-        setMemberData(memberData);
-        setOrganizationData(organizationData);
-        setCompanyData(companyData);
-        setContactData(contactData);
-        setEducationData(educationData);
-        setDependentData(dependentData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-
-    console.log('Admin Dashboard');
-  }, []);
   return (
     <>
       <div className='Dashboard__Header'>
@@ -290,100 +227,6 @@ const Dashboard = () => {
         <pre>
           <p>{responseData.queries}</p>
         </pre>
-      </div>
-
-      <div className='Dashboard__Section Dashboard__Tables'>
-        <h1>Member Information</h1>
-        <div className='Dashboard__Tables__Application'>
-          <div className='Dashboard__Tables__Application__Table'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Member ID</th>
-                  <th>Member Name</th>
-                  <th>Place of Birth</th>
-                  <th>Date of Birth</th>
-                  <th>Address</th>
-                  <th>Sex</th>
-                  <th>Height</th>
-                  <th>Weight</th>
-                  <th>Civil Status</th>
-                  <th>Nationality</th>
-                  <th>Religion</th>
-                  <th>Blood Type</th>
-                  <th>Telephone Number</th>
-                  <th>Cellphone Number</th>
-                  <th>Email</th>
-                  <th>Sponsor Name</th>
-                  <th>Sponsor Membership ID</th>
-                  <th>Work Title or Position</th>
-                  <th>Company Code</th>
-                </tr>
-              </thead>
-              <tbody>
-                {memberData.map((object, index) => (
-                  <tr key={index}>
-                    <td>{object.member_id}</td>
-                    <td>{object.member_name}</td>
-                    <td>{object.place_of_birth}</td>
-                    <td>{object.date_of_birth}</td>
-                    <td>{object.address}</td>
-                    <td>{object.sex}</td>
-                    <td>{object.height_in_cm}</td>
-                    <td>{object.weight_in_kg}</td>
-                    <td>{object.civil_status}</td>
-                    <td>{object.nationality}</td>
-                    <td>{object.religion}</td>
-                    <td>{object.blood_type}</td>
-                    <td>{object.telephone_number}</td>
-                    <td>{object.cellphone_number}</td>
-                    <td>{object.email}</td>
-                    <td>{object.sponsor_name}</td>
-                    <td>{object.sponsor_membership_id}</td>
-                    <td>{object.work_title_or_position}</td>
-                    <td>{object.company_code}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div className='Dashboard__Section Dashboard__Tables'>
-        <h1>Application Details</h1>
-        <div className='Dashboard__Tables__Application'>
-          <div className='Dashboard__Tables__Application__Table'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Application Code</th>
-                  <th>Member ID</th>
-                  <th>Club ID</th>
-                  <th>Contact ID</th>
-                  <th>Dependent ID</th>
-                  <th>Education ID</th>
-                  <th>Date of Application</th>
-                  <th>Application Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {applicationData.map((object, index) => (
-                  <tr key={index}>
-                    <td>{object.applicant_code}</td>
-                    <td>{object.club_id}</td>
-                    <td>{object.contact_id}</td>
-                    <td>{object.dependent_id}</td>
-                    <td>{object.education_id}</td>
-                    <td>{object.member_id}</td>
-                    <td>{object.date_of_application}</td>
-                    <td>{object.application_status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </>
   );
