@@ -13,7 +13,7 @@ export const queryAnswers = {
       sqlScript: `
         SELECT member_name, sponsor_name, address
         FROM member_information
-        WHERE sponsor_name = 'Liam Jose' AND address LIKE '%Metro Manila%';
+        WHERE sponsor_name = 'Liam, K, Jose,' AND address LIKE '%Metro Manila%';
         `,
     },
     {

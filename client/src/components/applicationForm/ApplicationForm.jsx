@@ -115,6 +115,41 @@ const ApplicationForm = () => {
   // ON SUBMIT
   const [fetchResponse, setFetchResponse] = useState(null);
   const handleFormSubmit = async () => {
+    // handle empty values
+    if (
+      applicantData.organization_club.club_region === '' ||
+      applicantData.organization_club.club_name === ''
+    ) {
+      alert('Fill All Required Fields in Organization Section');
+    }
+
+    if (
+      applicantData.member_information.barangay === '' ||
+      applicantData.member_information.blood_type === '' ||
+      applicantData.member_information.cellphone_number === '' ||
+      applicantData.member_information.city === '' ||
+      applicantData.member_information.civil_status === '' ||
+      applicantData.member_information.date_of_birth === '' ||
+      applicantData.member_information.email === '' ||
+      applicantData.member_information.first_name === '' ||
+      applicantData.member_information.height_in_cm === '' ||
+      applicantData.member_information.nationality === '' ||
+      applicantData.member_information.place_of_birth === '' ||
+      applicantData.member_information.province === '' ||
+      applicantData.member_information.religion === '' ||
+      applicantData.member_information.sex === '' ||
+      applicantData.member_information.street === '' ||
+      applicantData.member_information.weight_in_kg === '' ||
+      applicantData.member_information.zip_code === ''
+    ) {
+      alert('Fill All Required Fields in Personal Information Section');
+    }
+
+    console.log(Object.keys(applicantData.contact_person).length);
+    if (Object.keys(applicantData.contact_person).length < 2) {
+      alert('Fill All Required Fields in Contact Person');
+    }
+
     console.log('SUBMIT APPLICATION FORM');
     console.log(applicantData);
 
