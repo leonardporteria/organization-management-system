@@ -120,25 +120,35 @@ queryRouter.post('/query/update/organization', async (req, res) => {
 });
 
 // 15 QUERIES
-// GET one query by id
 queryRouter.get('/query/:difficulty/:number', async (req, res) => {
-  // PARAM 1
-  if (req.params.difficulty === 'easy' && req.params.number === '1') {
-    const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
-    const query = `
-      SELECT civil_status, count(sex) as sexCounter 
-      FROM member_information
-      WHERE sex = 'm'
-      GROUP BY civil_status 
-        `;
+  const { difficulty, number } = req.params;
 
-    await pool.query(useQuery);
-    const [rows] = await pool.query(query);
+  // Find the corresponding queries based on difficulty and number
+  const queries = queryAnswers[difficulty]?.filter(
+    (query) => query.queryNumber === Number(number)
+  );
+
+  if (queries && queries.length > 0) {
+    const useQuery = `USE ${process.env.MYSQL_DATABASE};`;
+
+    // Execute each query and collect the results
+    const [results] = await Promise.all(
+      queries.map(async (query) => {
+        await pool.query(useQuery);
+        const [rows] = await pool.query(query.sqlScript);
+        return rows;
+      })
+    );
+    console.log(results);
     res.json({
       message: 'GET one query',
       params: req.params.id,
-      data: rows,
-      query: query,
+      data: results,
+      queries: queries.map((query) => query.sqlScript),
+    });
+  } else {
+    res.status(404).json({
+      message: 'Query not found',
     });
   }
 });

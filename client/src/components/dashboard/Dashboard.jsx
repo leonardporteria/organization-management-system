@@ -160,6 +160,7 @@ const Dashboard = () => {
         },
       });
       const responseData = await response.json();
+      console.log(responseData);
 
       return responseData.data;
     } catch (error) {
@@ -168,7 +169,6 @@ const Dashboard = () => {
   };
 
   const handleQueryClick = async (params) => {
-    console.log(params);
     setQueryResult(await getResultFromQuery(params));
     console.log(queryResult);
   };
