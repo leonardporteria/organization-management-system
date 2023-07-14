@@ -118,7 +118,9 @@ const Dashboard = () => {
   const [queryResult, setQueryResult] = useState([]);
 
   const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
-  const [selectedProblem, setSelectedProblem] = useState('');
+  const [selectedProblem, setSelectedProblem] = useState('1');
+
+  const [responseData, setResponseData] = useState({});
 
   const handleDifficultyChange = (event) => {
     setSelectedDifficulty(event.target.value);
@@ -161,6 +163,7 @@ const Dashboard = () => {
       });
       const responseData = await response.json();
       console.log(responseData);
+      setResponseData(responseData);
 
       return responseData.data;
     } catch (error) {
@@ -219,8 +222,8 @@ const Dashboard = () => {
       </div>
 
       <div className='Dashboard__Section Dashboard__Menu'>
-        <h1>Menu</h1>
-        <div>
+        <h1>Query Selection</h1>
+        <div className=' Dashboard__Query'>
           <label>
             <p>Difficulty:</p>
             <select
@@ -236,7 +239,6 @@ const Dashboard = () => {
           <label>
             <p> Query Problem:</p>
             <select value={selectedProblem} onChange={handleProblemChange}>
-              <option>Select Query Question</option>
               {problems.map((problem, index) => (
                 <option key={index} value={problem.queryNumber}>
                   {problem.queryProblem}
@@ -254,6 +256,12 @@ const Dashboard = () => {
         >
           <h1>Query</h1>
         </div>
+
+        <h1>Problem</h1>
+        <p>{problems[selectedProblem - 1].queryProblem}</p>
+
+        <h1>Result</h1>
+
         <div className='Dashboard__Menu__Table'>
           <table>
             <thead>
@@ -275,12 +283,17 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
+
+        <h1>Query Used</h1>
+        <pre>
+          <p>{responseData.queries}</p>
+        </pre>
       </div>
 
       <div className='Dashboard__Section Dashboard__Tables'>
-        <h1>Applicaiton Details</h1>
-        <div className='Dashboard__Tables__Applicaiton'>
-          <div className='Dashboard__Tables__Applicaiton__Table'>
+        <h1>Application Details</h1>
+        <div className='Dashboard__Tables__Application'>
+          <div className='Dashboard__Tables__Application__Table'>
             <table>
               <thead>
                 <tr>

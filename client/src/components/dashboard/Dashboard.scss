@@ -66,9 +66,8 @@
   width: 100%;
   &__Table {
     overflow-x: auto;
-    border: 2px solid $neutral-900;
-    width: auto;
-
+    display: flex;
+    justify-content: center;
     > table,
     th,
     td {
@@ -77,12 +76,40 @@
       border: 1px solid $neutral-700;
     }
   }
+  > pre {
+    background-color: $neutral-900;
+    border-radius: 0.5rem;
+    > p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.Dashboard__Query {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  > label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    > select {
+      cursor: pointer;
+      background-color: $neutral-900;
+      border: 0;
+      border-radius: 0.2rem;
+      font-family: 'Montserrat', sans-serif;
+      color: $neutral-50;
+      padding: 0.44rem;
+      width: 100%;
+    }
+  }
 }
 
 .Dashboard__Tables {
   width: 100%;
 
-  &__Applicaiton {
+  &__Application {
     overflow-x: auto;
     border: 2px solid $neutral-900;
     &__Table {
