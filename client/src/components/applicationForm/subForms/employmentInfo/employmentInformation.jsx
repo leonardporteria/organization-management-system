@@ -31,7 +31,7 @@ const EmployeeInformation = ({ onInputChange }) => {
 
       <div className='Form__Employment__container'>
         <label>
-          <p>Name of Office:</p>
+          <p>Name of Office</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -40,7 +40,7 @@ const EmployeeInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Title and Position:</p>
+          <p>Title and Position</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -52,7 +52,7 @@ const EmployeeInformation = ({ onInputChange }) => {
 
       <div className='Form__Employment__container'>
         <label>
-          <p>Workplace Telephone Number:</p>
+          <p>Workplace Telephone Number</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -61,7 +61,7 @@ const EmployeeInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Workplace Email:</p>
+          <p>Workplace Email</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -73,7 +73,7 @@ const EmployeeInformation = ({ onInputChange }) => {
 
       <div className='Form__Employment__container'>
         <label>
-          <p>Company Address:</p>
+          <p>Company Address</p>
           <input
             type='text'
             onBlur={(e) => {

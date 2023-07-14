@@ -6,7 +6,7 @@ const LegalDependentForm = ({ index, handleDependentData }) => {
   return (
     <div className='Form__Dependent__container'>
       <label>
-        <p>Relationship:</p>
+        <p>Relationship</p>
         <input
           type='text'
           onBlur={(e) => {
@@ -15,7 +15,7 @@ const LegalDependentForm = ({ index, handleDependentData }) => {
         />
       </label>
       <label>
-        <p>Name:</p>
+        <p>Name</p>
         <input
           type='text'
           onBlur={(e) => {
@@ -24,7 +24,7 @@ const LegalDependentForm = ({ index, handleDependentData }) => {
         />
       </label>
       <label>
-        <p>Date of Birth:</p>
+        <p>Date of Birth</p>
         <input
           type='date'
           onBlur={(e) => {
@@ -33,7 +33,7 @@ const LegalDependentForm = ({ index, handleDependentData }) => {
         />
       </label>
       <label>
-        <p>Cellphone Number:</p>
+        <p>Cellphone Number</p>
         <input
           type='text'
           onBlur={(e) => {

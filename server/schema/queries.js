@@ -141,7 +141,7 @@ export const queryAnswers = {
         FROM application_details AS A
         INNER JOIN legal_dependents AS D ON A.dependent_id = D.dependent_id
         GROUP BY A.member_id
-        HAVING COUNT(A.dependent_id) > 1;
+        HAVING COUNT(A.dependent_id) > 0;
         `,
     },
     {
@@ -177,10 +177,10 @@ export const queryAnswers = {
     {
       queryNumber: 6,
       sqlScript: `
-        SELECT COUNT(DISTINCT A.member_id) AS members_per_club, club_region, club_name
-        FROM member_information AS M
-        INNER JOIN application_details AS A ON M.member_id = A.member_id
-        INNER JOIN organization_club AS O ON A.club_id = O.club_id
+        SELECT club_region, club_name, count(DISTINCT A.member_id) AS members_per_club
+        FROM member_information as M
+        INNER JOIN application_details as A on M.member_id = A.member_id
+        INNER JOIN organization_club as O on A.club_id = O.club_id
         GROUP BY club_region, club_name;
     `,
     },

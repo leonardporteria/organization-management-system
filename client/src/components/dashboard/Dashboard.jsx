@@ -8,16 +8,16 @@ const Dashboard = () => {
       {
         queryNumber: 1,
         queryProblem:
-          'List the names of the applicants who live in Metro Manila and ages from 15 to 25 years old. ',
+          "List the members' names and age of the applicants from 15 to 25 years old who live in Metro Manila.",
       },
       {
         queryNumber: 2,
         queryProblem:
-          'Display the name  and address of members who are sponsored by Liam Jose and currently residing in Metro Manila. ',
+          "Display the members' names and addresses of members who are sponsored by Liam Jose and currently residing in Metro Manila. ",
       },
       {
         queryNumber: 3,
-        queryProblem: 'Display the president name of each club.',
+        queryProblem: "Display the president's name of each club.",
       },
       {
         queryNumber: 4,
@@ -25,34 +25,35 @@ const Dashboard = () => {
       },
       {
         queryNumber: 5,
-        queryProblem: 'Display the names of members who are employed.',
+        queryProblem:
+          'Display the names of members and company code of those who are employed.',
       },
     ],
     medium: [
       {
         queryNumber: 1,
         queryProblem:
-          'Count how many members are sponsored by a sponsor(member).',
+          'Count how many members are sponsored by a sponsor(member). Include the name of the sponsor.',
       },
       {
         queryNumber: 2,
         queryProblem:
-          'List the names of the members and the corresponding company name in which they are employed.',
+          'List the names of the members and their corresponding company name in which they are employed.',
       },
       {
         queryNumber: 3,
         queryProblem:
-          'List the names, civil status, club name, of applicants who are single and married only.',
+          'List the names, civil status, club name of applicants who are single and married only from Sunday Uplifters Club.',
       },
       {
         queryNumber: 4,
         queryProblem:
-          'List the names of  those applicants who applied before 2020.',
+          'List the names of those members who applied before 2020.',
       },
       {
         queryNumber: 5,
         queryProblem:
-          'Display the name, title and position, and company address of those applicants employed in Makati.',
+          "Display the members' names, title and position, and company address of those members who are employed in Makati.",
       },
       {
         queryNumber: 6,
@@ -62,17 +63,17 @@ const Dashboard = () => {
       {
         queryNumber: 7,
         queryProblem:
-          'Display the member name, and school name of the elementary school a member went to.',
+          "Display the members' names and name of the elementary school where they attended.",
       },
       {
         queryNumber: 8,
         queryProblem:
-          'List the name of male members who has a spouse as their legal dependents.',
+          'List the names of male members with a spouse as their legal dependents.',
       },
       {
         queryNumber: 9,
         queryProblem:
-          'List the names of the members who has sponsor and their corresponding sponsor.',
+          'List the names of the members with a sponsor. Include the name of the sponsor.',
       },
     ],
     hard: [
@@ -83,17 +84,17 @@ const Dashboard = () => {
       {
         queryNumber: 2,
         queryProblem:
-          'list member id, and dependent count who have legal dependents that are more than 1',
+          'List the member id of the members and their dependent count. Include only those who have one or more than one legal dependent.',
       },
       {
         queryNumber: 3,
         queryProblem:
-          'Count separately the male and female members who are employed in the same company.',
+          'Count separately the male and female members who are employed in the same company. Display the sex and company name.',
       },
       {
         queryNumber: 4,
         queryProblem:
-          'Display how many members are employed at Accenture Philippines and Tower Communications. Include the names and the corresponding company where they are employed.',
+          'Display and count how many members are employed at Accenture Philippines and Tower Communications.',
       },
       {
         queryNumber: 5,
@@ -102,7 +103,7 @@ const Dashboard = () => {
       },
       {
         queryNumber: 6,
-        queryProblem: 'COUNT how many members are there per club by region',
+        queryProblem: 'Count how many members are there per club by region.',
       },
     ],
   };

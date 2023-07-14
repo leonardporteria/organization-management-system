@@ -8,16 +8,21 @@
 
 .Hero {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: column;
   &__About {
+    border-radius: 1rem;
+    background-color: $neutral-800;
+    padding: 2rem;
     > p {
-      max-width: 70%;
       line-height: 2.5;
     }
   }
   &__Rules {
-    max-width: 70%;
+    border-radius: 1rem;
+    background-color: $neutral-800;
+    padding: 2rem;
+    max-width: 100%;
     line-height: 2.5;
   }
 }

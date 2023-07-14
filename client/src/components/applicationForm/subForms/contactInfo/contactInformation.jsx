@@ -6,7 +6,7 @@ const ContactInEmergencyForm = ({ index, handleContactData }) => {
   return (
     <div className='Form__Contact__container'>
       <label>
-        <p>Relationship:</p>
+        <p className='required'>Relationship</p>
         <input
           type='text'
           onBlur={(e) => {
@@ -15,7 +15,7 @@ const ContactInEmergencyForm = ({ index, handleContactData }) => {
         />
       </label>
       <label>
-        <p>Name:</p>
+        <p className='required'>Name</p>
         <input
           type='text'
           onBlur={(e) => {
@@ -24,7 +24,7 @@ const ContactInEmergencyForm = ({ index, handleContactData }) => {
         />
       </label>
       <label>
-        <p>Address:</p>
+        <p className='required'>Address</p>
         <input
           type='text'
           onBlur={(e) => {
@@ -33,7 +33,7 @@ const ContactInEmergencyForm = ({ index, handleContactData }) => {
         />
       </label>
       <label>
-        <p>Cellphone Number:</p>
+        <p className='required'>Cellphone Number</p>
         <input
           type='text'
           onBlur={(e) => {

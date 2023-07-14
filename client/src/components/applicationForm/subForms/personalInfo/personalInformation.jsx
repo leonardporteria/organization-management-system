@@ -66,7 +66,7 @@ const PersonalInformation = ({ onInputChange }) => {
       <h1 className='Form__Personal__title_c'>Name</h1>
       <div className='Form__Personal__name'>
         <label>
-          <p>Last Name:</p>
+          <p className='required'>Last Name</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -75,7 +75,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>First Name:</p>
+          <p className='required'>First Name</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -84,7 +84,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Middle Name:</p>
+          <p>Middle Name</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -93,7 +93,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Suffix:</p>
+          <p>Suffix</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -106,7 +106,7 @@ const PersonalInformation = ({ onInputChange }) => {
       <h1 className='Form__Personal__title_c'>Biographical Data</h1>
       <div className='Form__Personal__details'>
         <label>
-          <p>Place of Birth:</p>
+          <p className='required'>Place of Birth</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -115,7 +115,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date of Birth:</p>
+          <p className='required'>Date of Birth</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -124,7 +124,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Civil Status:</p>
+          <p className='required'>Civil Status</p>
           <select
             value={selectedCivilStatus}
             onChange={(e) => {
@@ -143,7 +143,7 @@ const PersonalInformation = ({ onInputChange }) => {
 
       <div className='Form__Personal__details'>
         <label>
-          <p>Height in cm:</p>
+          <p className='required'>Height in cm</p>
           <input
             type='number'
             onBlur={(e) => {
@@ -152,7 +152,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Weight in kg:</p>
+          <p className='required'>Weight in kg</p>
           <input
             type='number'
             onBlur={(e) => {
@@ -161,7 +161,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Sex</p>
+          <p className='required'>Sex</p>
           <select
             value={selectedSex}
             onChange={(e) => {
@@ -178,7 +178,7 @@ const PersonalInformation = ({ onInputChange }) => {
 
       <div className='Form__Personal__details'>
         <label>
-          <p>Nationality:</p>
+          <p className='required'>Nationality</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -187,7 +187,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Religion:</p>
+          <p className='required'>Religion</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -196,7 +196,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Blood Type:</p>
+          <p className='required'>Blood Type</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -210,7 +210,7 @@ const PersonalInformation = ({ onInputChange }) => {
       <h1 className='Form__Personal__title_c'>Contact Information</h1>
       <div className='Form__Personal__contact'>
         <label>
-          <p>Cellphone Number:</p>
+          <p className='required'>Cellphone Number</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -219,7 +219,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Telephone Number:</p>
+          <p>Telephone Number</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -228,7 +228,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Email:</p>
+          <p className='required'>Email</p>
           <input
             type='email'
             onBlur={(e) => {
@@ -241,7 +241,7 @@ const PersonalInformation = ({ onInputChange }) => {
       <h1 className='Form__Personal__title_c'>Address</h1>
       <div className='Form__Personal__contact'>
         <label>
-          <p>House Number:</p>
+          <p>House Number</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -250,7 +250,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Street Name:</p>
+          <p className='required'>Street Name</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -259,7 +259,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Barangay:</p>
+          <p className='required'>Barangay</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -271,7 +271,7 @@ const PersonalInformation = ({ onInputChange }) => {
 
       <div className='Form__Personal__contact'>
         <label>
-          <p>City/Municipality:</p>
+          <p className='required'>City/Municipality</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -280,7 +280,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Province:</p>
+          <p className='required'>Province</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -289,7 +289,7 @@ const PersonalInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Zip Code:</p>
+          <p className='required'>Zip Code</p>
           <input
             type='text'
             onBlur={(e) => {

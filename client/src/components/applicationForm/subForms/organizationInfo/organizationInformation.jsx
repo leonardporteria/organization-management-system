@@ -129,11 +129,12 @@ const OrganizationInformation = ({ onInputChange }) => {
   return (
     <div className='Form__Organization'>
       {/* ORGANIZATION DETAILS */}
+      <p>all fields with asterisk(*) are required</p>
       <h1 className='Form__Organization__title'>ORGANIZATION INFORMATION</h1>
 
       <div className='Form__Organization__container'>
         <label>
-          <p>Organization Region</p>
+          <p className='required'>Organization Region</p>
           <select
             value={selectedRegion}
             onChange={(e) => {
@@ -151,7 +152,7 @@ const OrganizationInformation = ({ onInputChange }) => {
           </select>
         </label>
         <label>
-          <p>Club Name</p>
+          <p className='required'>Club Name</p>
           <select
             value={selectedClub}
             onChange={(e) => {

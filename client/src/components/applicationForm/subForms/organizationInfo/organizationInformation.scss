@@ -39,4 +39,9 @@
     width: 100%;
     background-color: $neutral-600;
   }
+
+  > p {
+    color: $red-500;
+    font-style: italic;
+  }
 }

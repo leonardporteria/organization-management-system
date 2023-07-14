@@ -7,27 +7,27 @@ const EducationInformation = ({ onInputChange }) => {
     elementary: {
       school_name: '',
       date_graduated: '',
-      course_strand: '',
+      course_strand: 'N/A',
     },
     junior_hs: {
       school_name: '',
       date_graduated: '',
-      course_strand: '',
+      course_strand: 'N/A',
     },
     senior_hs: {
       school_name: '',
       date_graduated: '',
-      course_strand: '',
+      course_strand: 'N/A',
     },
     college: {
       school_name: '',
       date_graduated: '',
-      course_strand: '',
+      course_strand: 'N/A',
     },
     post_grad: {
       school_name: '',
       date_graduated: '',
-      course_strand: '',
+      course_strand: 'N/A',
     },
   });
 
@@ -50,11 +50,12 @@ const EducationInformation = ({ onInputChange }) => {
     <div className='Form__Education'>
       {/* EMPLOYMENT DETAILS */}
       <h1 className='Form__Education__title'>EDUCATION INFORMATION</h1>
+      <p>Put 'N/A' to course if not applicable</p>
 
       <div className='Form__Education__container'>
         <h1>Elementary Education Attainment</h1>
         <label>
-          <p>Name of School:</p>
+          <p>Name of School</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -63,7 +64,7 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date Graduated:</p>
+          <p>Date Graduated</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -72,12 +73,13 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Course/Strand:</p>
+          <p>Course/Strand</p>
           <input
             type='text'
             onBlur={(e) => {
               handleEducationData(e, 'elementary', 'course_strand');
             }}
+            defaultValue={'N/A'}
           />
         </label>
       </div>
@@ -85,7 +87,7 @@ const EducationInformation = ({ onInputChange }) => {
       <div className='Form__Education__container'>
         <h1>Junior High School Education Attainment</h1>
         <label>
-          <p>Name of School:</p>
+          <p>Name of School</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -94,7 +96,7 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date Graduated:</p>
+          <p>Date Graduated</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -103,12 +105,13 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Course/Strand:</p>
+          <p>Course/Strand</p>
           <input
             type='text'
             onBlur={(e) => {
               handleEducationData(e, 'junior_hs', 'course_strand');
             }}
+            defaultValue={'N/A'}
           />
         </label>
       </div>
@@ -116,7 +119,7 @@ const EducationInformation = ({ onInputChange }) => {
       <div className='Form__Education__container'>
         <h1>Senior High School Education Attainment</h1>
         <label>
-          <p>Name of School:</p>
+          <p>Name of School</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -125,7 +128,7 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date Graduated:</p>
+          <p>Date Graduated</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -134,12 +137,13 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Course/Strand:</p>
+          <p>Course/Strand</p>
           <input
             type='text'
             onBlur={(e) => {
               handleEducationData(e, 'senior_hs', 'course_strand');
             }}
+            defaultValue={'N/A'}
           />
         </label>
       </div>
@@ -147,7 +151,7 @@ const EducationInformation = ({ onInputChange }) => {
       <div className='Form__Education__container'>
         <h1>College Education Attainment</h1>
         <label>
-          <p>Name of School:</p>
+          <p>Name of School</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -156,7 +160,7 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date Graduated:</p>
+          <p>Date Graduated</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -165,12 +169,13 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Course/Strand:</p>
+          <p>Course/Strand</p>
           <input
             type='text'
             onBlur={(e) => {
               handleEducationData(e, 'college', 'course_strand');
             }}
+            defaultValue={'N/A'}
           />
         </label>
       </div>
@@ -178,7 +183,7 @@ const EducationInformation = ({ onInputChange }) => {
       <div className='Form__Education__container'>
         <h1>Post Graduate Education Attainment</h1>
         <label>
-          <p>Name of School:</p>
+          <p>Name of School</p>
           <input
             type='text'
             onBlur={(e) => {
@@ -187,7 +192,7 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Date Graduated:</p>
+          <p>Date Graduated</p>
           <input
             type='date'
             onBlur={(e) => {
@@ -196,12 +201,13 @@ const EducationInformation = ({ onInputChange }) => {
           />
         </label>
         <label>
-          <p>Course/Strand:</p>
+          <p>Course/Strand</p>
           <input
             type='text'
             onBlur={(e) => {
               handleEducationData(e, 'post_grad', 'course_strand');
             }}
+            defaultValue={'N/A'}
           />
         </label>
       </div>
