@@ -124,6 +124,7 @@ const Dashboard = () => {
 
   const handleDifficultyChange = (event) => {
     setSelectedDifficulty(event.target.value);
+    setSelectedProblem('1');
   };
 
   const handleProblemChange = (event) => {
@@ -288,6 +289,64 @@ const Dashboard = () => {
         <pre>
           <p>{responseData.queries}</p>
         </pre>
+      </div>
+
+      <div className='Dashboard__Section Dashboard__Tables'>
+        <h1>Member Information</h1>
+        <div className='Dashboard__Tables__Application'>
+          <div className='Dashboard__Tables__Application__Table'>
+            <table>
+              <thead>
+                <tr>
+                  <th>Member ID</th>
+                  <th>Member Name</th>
+                  <th>Place of Birth</th>
+                  <th>Date of Birth</th>
+                  <th>Address</th>
+                  <th>Sex</th>
+                  <th>Height</th>
+                  <th>Weight</th>
+                  <th>Civil Status</th>
+                  <th>Nationality</th>
+                  <th>Religion</th>
+                  <th>Blood Type</th>
+                  <th>Telephone Number</th>
+                  <th>Cellphone Number</th>
+                  <th>Email</th>
+                  <th>Sponsor Name</th>
+                  <th>Sponsor Membership ID</th>
+                  <th>Work Title or Position</th>
+                  <th>Company Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                {memberData.map((object, index) => (
+                  <tr key={index}>
+                    <td>{object.member_id}</td>
+                    <td>{object.member_name}</td>
+                    <td>{object.place_of_birth}</td>
+                    <td>{object.date_of_birth}</td>
+                    <td>{object.address}</td>
+                    <td>{object.sex}</td>
+                    <td>{object.height_in_cm}</td>
+                    <td>{object.weight_in_kg}</td>
+                    <td>{object.civil_status}</td>
+                    <td>{object.nationality}</td>
+                    <td>{object.religion}</td>
+                    <td>{object.blood_type}</td>
+                    <td>{object.telephone_number}</td>
+                    <td>{object.cellphone_number}</td>
+                    <td>{object.email}</td>
+                    <td>{object.sponsor_name}</td>
+                    <td>{object.sponsor_membership_id}</td>
+                    <td>{object.work_title_or_position}</td>
+                    <td>{object.company_code}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div className='Dashboard__Section Dashboard__Tables'>

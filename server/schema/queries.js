@@ -28,7 +28,7 @@ export const queryAnswers = {
       sqlScript: `
         SELECT member_name, blood_type
         FROM member_information
-        WHERE blood_type = 'O';
+        WHERE blood_type LIKE 'O%';
       `,
     },
     {
