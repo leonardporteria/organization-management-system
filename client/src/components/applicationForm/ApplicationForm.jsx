@@ -116,40 +116,40 @@ const ApplicationForm = () => {
   const [fetchResponse, setFetchResponse] = useState(null);
   const handleFormSubmit = async () => {
     // handle empty values
-    if (
-      applicantData.organization_club.club_region === '' ||
-      applicantData.organization_club.club_name === ''
-    ) {
-      alert('Fill All Required Fields in Organization Section');
-      return;
-    }
+    // if (
+    //   applicantData.organization_club.club_region === '' ||
+    //   applicantData.organization_club.club_name === ''
+    // ) {
+    //   alert('Fill All Required Fields in Organization Section');
+    //   return;
+    // }
 
-    if (
-      applicantData.member_information.barangay === '' ||
-      applicantData.member_information.blood_type === '' ||
-      applicantData.member_information.cellphone_number === '' ||
-      applicantData.member_information.city === '' ||
-      applicantData.member_information.civil_status === '' ||
-      applicantData.member_information.date_of_birth === '' ||
-      applicantData.member_information.email === '' ||
-      applicantData.member_information.first_name === '' ||
-      applicantData.member_information.height_in_cm === '' ||
-      applicantData.member_information.nationality === '' ||
-      applicantData.member_information.place_of_birth === '' ||
-      applicantData.member_information.province === '' ||
-      applicantData.member_information.religion === '' ||
-      applicantData.member_information.sex === '' ||
-      applicantData.member_information.street === '' ||
-      applicantData.member_information.weight_in_kg === '' ||
-      applicantData.member_information.zip_code === ''
-    ) {
-      alert('Fill All Required Fields in Personal Information Section');
-      return;
-    }
-    if (Object.keys(applicantData.contact_person).length < 2) {
-      alert('Fill All Required Fields in Contact Person');
-      return;
-    }
+    // if (
+    //   applicantData.member_information.barangay === '' ||
+    //   applicantData.member_information.blood_type === '' ||
+    //   applicantData.member_information.cellphone_number === '' ||
+    //   applicantData.member_information.city === '' ||
+    //   applicantData.member_information.civil_status === '' ||
+    //   applicantData.member_information.date_of_birth === '' ||
+    //   applicantData.member_information.email === '' ||
+    //   applicantData.member_information.first_name === '' ||
+    //   applicantData.member_information.height_in_cm === '' ||
+    //   applicantData.member_information.nationality === '' ||
+    //   applicantData.member_information.place_of_birth === '' ||
+    //   applicantData.member_information.province === '' ||
+    //   applicantData.member_information.religion === '' ||
+    //   applicantData.member_information.sex === '' ||
+    //   applicantData.member_information.street === '' ||
+    //   applicantData.member_information.weight_in_kg === '' ||
+    //   applicantData.member_information.zip_code === ''
+    // ) {
+    //   alert('Fill All Required Fields in Personal Information Section');
+    //   return;
+    // }
+    // if (Object.keys(applicantData.contact_person).length < 2) {
+    //   alert('Fill All Required Fields in Contact Person');
+    //   return;
+    // }
 
     console.log('SUBMIT APPLICATION FORM');
     console.log(applicantData);
@@ -164,33 +164,33 @@ const ApplicationForm = () => {
     const educationURL = baseURL + '/education';
     const dependentURL = baseURL + '/legalDependent';
 
-    // CONTACT PERSON PATH [WORKING]
-    const contactResponse = await postAPI(contactURL);
-    console.log('Contact POST REQUEST Response: ', contactResponse);
+    // // CONTACT PERSON PATH [WORKING]
+    // const contactResponse = await postAPI(contactURL);
+    // console.log('Contact POST REQUEST Response: ', contactResponse);
 
-    // EDUCATION PATH [WORKING]
-    const educationResponse = await postAPI(educationURL);
-    console.log('Education POST REQUEST Response: ', educationResponse);
+    // // EDUCATION PATH [WORKING]
+    // const educationResponse = await postAPI(educationURL);
+    // console.log('Education POST REQUEST Response: ', educationResponse);
 
-    // LEGAL DEPENDENTS PATH [WORKING]
-    const dependentResponse = await postAPI(dependentURL);
-    console.log('Dependent POST REQUEST Response: ', dependentResponse);
+    // // LEGAL DEPENDENTS PATH [WORKING]
+    // const dependentResponse = await postAPI(dependentURL);
+    // console.log('Dependent POST REQUEST Response: ', dependentResponse);
 
     // COMPANY PATH [WORKING]
     const companyResponse = await postAPI(companyURL);
     console.log('Company POST REQUEST Response: ', companyResponse);
 
-    // ORGANIZATION CLUB PATH [WORKING]
-    const organizaitonResponse = await postAPI(organizationURL);
-    console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
+    // // ORGANIZATION CLUB PATH [WORKING]
+    // const organizaitonResponse = await postAPI(organizationURL);
+    // console.log('Organizaiton POST REQUEST Response: ', organizaitonResponse);
 
-    // MEMBER INFORMATION PATH [WORKING]
-    const memberResponse = await postAPI(memberURL);
-    console.log('Member POST REQUEST Response: ', memberResponse);
+    // // MEMBER INFORMATION PATH [WORKING]
+    // const memberResponse = await postAPI(memberURL);
+    // console.log('Member POST REQUEST Response: ', memberResponse);
 
-    // APPLICATION DETAILS PATH [WORKING]
-    const applicationResponse = await postAPI(applicationURL);
-    console.log('Application POST REQUEST Response: ', applicationResponse);
+    // // APPLICATION DETAILS PATH [WORKING]
+    // const applicationResponse = await postAPI(applicationURL);
+    // console.log('Application POST REQUEST Response: ', applicationResponse);
   };
 
   return (

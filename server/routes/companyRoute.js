@@ -1,4 +1,8 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import { pool } from '../config/database.js';
+
 const companyRouter = express.Router();
 
 // utils import;
@@ -37,31 +41,54 @@ companyRouter.post('/company', async (req, res) => {
       message: 'NO COMPANY INFO',
     });
 
-  // ID GENERATION
-  const applicantToday = await getApplicationsToday();
-  const [uid] = Object.values(applicantToday[0]);
-  const member_id = generateCompanyCode(uid.toString());
+  // check if company already exists
+  const useQuery = `use ${process.env.MYSQL_DATABASE};`;
 
-  // concatenate the id for multivalues
-  // company
-  const companyCode = concatenateCompanyCode(member_id, 'W', '0');
-  req.body.company.company_code = companyCode;
+  const checkCompanyQuery = `
+    SELECT * 
+    FROM company 
+    WHERE company_name = "${req.body.company.company_name}"
+    AND company_telephone = "${req.body.company.company_telephone}"
+    AND company_email = "${req.body.company.company_email}"
+    AND company_address = "${req.body.company.company_address}";
 
-  // QUERY TO DATABASE (COMPANY TABLE)
-  const { company_code, ...rest } = req.body.company;
-  const companyInformation = { ...rest, company_code };
+`;
 
-  const companyAttributes = Object.keys(companyInformation);
-  const companyValues = Object.values(companyInformation);
+  await pool.query(useQuery);
+  const [rows] = await pool.query(checkCompanyQuery);
 
-  console.log('COMPANY:', companyInformation);
+  if (rows[0]) {
+    res.json({
+      message: 'SAME COMPANY CODE',
+      data: rows,
+    });
+  } else {
+    // ID GENERATION
+    const applicantToday = await getApplicationsToday();
+    const [uid] = Object.values(applicantToday[0]);
+    const member_id = generateCompanyCode(uid.toString());
 
-  await insertIntoTable('company', companyAttributes, companyValues);
+    // concatenate the id for multivalues
+    // company
+    const companyCode = concatenateCompanyCode(member_id, 'W', '0');
+    req.body.company.company_code = companyCode;
 
-  res.json({
-    message: 'POST new company',
-    company: companyInformation,
-  });
+    // QUERY TO DATABASE (COMPANY TABLE)
+    const { company_code, ...rest } = req.body.company;
+    const companyInformation = { ...rest, company_code };
+
+    const companyAttributes = Object.keys(companyInformation);
+    const companyValues = Object.values(companyInformation);
+
+    console.log('COMPANY:', companyInformation);
+
+    await insertIntoTable('company', companyAttributes, companyValues);
+
+    res.json({
+      message: 'POST new company',
+      company: companyInformation,
+    });
+  }
 });
 // UPDATE one company by id
 companyRouter.delete('/company/:id', (req, res) => {

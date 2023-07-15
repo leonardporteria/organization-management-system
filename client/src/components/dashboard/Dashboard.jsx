@@ -156,7 +156,7 @@ const Dashboard = () => {
     <>
       <div className='Dashboard__Header'>
         <h1>
-          Welcome to Socio-Civing Organization <br /> Dashboard Tables
+          Welcome to Socio-Civic Organization <br /> Dashboard Tables
         </h1>
       </div>
 
