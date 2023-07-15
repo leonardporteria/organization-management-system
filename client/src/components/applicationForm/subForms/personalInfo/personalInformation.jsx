@@ -28,7 +28,7 @@ const PersonalInformation = ({ onInputChange }) => {
     religion: '',
     blood_type: '',
     // contact details
-    telephone_number: '',
+    telephone_number: null,
     cellphone_number: '',
     email: '',
   });

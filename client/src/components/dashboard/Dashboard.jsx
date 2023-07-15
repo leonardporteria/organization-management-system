@@ -99,11 +99,12 @@ const Dashboard = () => {
       {
         queryNumber: 5,
         queryProblem:
-          'Count how many club members are there in the regions of CALABARZON and NCR.',
+          'Count how many club members are there in the regions of CALABARZON and NCR. (regardless of membership status).',
       },
       {
         queryNumber: 6,
-        queryProblem: 'Count how many members are there per club by region.',
+        queryProblem:
+          'Count how many members are there per club by region. (regardless of membership status).',
       },
     ],
   };
