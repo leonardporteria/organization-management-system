@@ -4,7 +4,7 @@ const LandingPage = () => {
   return (
     <>
       <div className='Header'>
-        <h1>Socio-Civing Organization</h1>
+        <h1>Socio-Civic Organization</h1>
       </div>
 
       <div className='Hero'>
@@ -37,7 +37,7 @@ const LandingPage = () => {
           <p>• A Club president must be a member of its own club.</p>
           <p>• A president must be a president of one club only.</p>
           <p>
-            • A member can facilitate a newly created club event though he is
+            • A Member can facilitate a newly created club event though he is
             not a part of it.
           </p>
           <p>• A Member can be a president of one club at a time.</p>
@@ -56,6 +56,10 @@ const LandingPage = () => {
           <p>
             • A Company may employ multiple members, possibly different
             positions.
+          </p>
+          <p>
+            • An Applicant must have at least two contact person in case of
+            emergency
           </p>
           <p>
             • An Applicant may have one or more legal dependents but may have

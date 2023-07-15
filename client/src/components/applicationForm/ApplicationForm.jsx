@@ -121,6 +121,7 @@ const ApplicationForm = () => {
       applicantData.organization_club.club_name === ''
     ) {
       alert('Fill All Required Fields in Organization Section');
+      return;
     }
 
     if (
@@ -143,11 +144,11 @@ const ApplicationForm = () => {
       applicantData.member_information.zip_code === ''
     ) {
       alert('Fill All Required Fields in Personal Information Section');
+      return;
     }
-
-    console.log(Object.keys(applicantData.contact_person).length);
     if (Object.keys(applicantData.contact_person).length < 2) {
       alert('Fill All Required Fields in Contact Person');
+      return;
     }
 
     console.log('SUBMIT APPLICATION FORM');
@@ -196,7 +197,7 @@ const ApplicationForm = () => {
     <>
       <div className='Header'>
         <h1>
-          Join our Socio-Civing Organization!
+          Join our Socio-Civic Organization!
           <br /> Fill up the form below
         </h1>
       </div>

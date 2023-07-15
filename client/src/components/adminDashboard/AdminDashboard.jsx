@@ -280,7 +280,7 @@ const AdminDashboard = () => {
     <>
       <div className='Admin__Header'>
         <h1>
-          Welcome to Socio-Civing Organization <br /> Admin Dashboard
+          Welcome to Socio-Civic Organization <br /> Admin Dashboard
         </h1>
       </div>
 
