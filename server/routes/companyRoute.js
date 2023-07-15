@@ -58,6 +58,10 @@ companyRouter.post('/company', async (req, res) => {
   const [rows] = await pool.query(checkCompanyQuery);
 
   if (rows[0]) {
+    // console.log('company code: ', rows[0].company_code);
+    // console.log(req.body);
+    req.body.company.company_code = rows[0].company_code;
+
     res.json({
       message: 'SAME COMPANY CODE',
       data: rows,

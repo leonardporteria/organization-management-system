@@ -1,4 +1,8 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import { pool } from '../config/database.js';
+
 const memberRouter = express.Router();
 
 // utils import
@@ -36,6 +40,7 @@ memberRouter.post('/member', async (req, res) => {
   req.body.member_information.member_id = member_id;
 
   // COMPANY CODE GENERATION
+
   // set to null if no value
   if (
     req.body.company.company_name !== '' ||
@@ -43,9 +48,30 @@ memberRouter.post('/member', async (req, res) => {
     req.body.company.company_address !== '' ||
     req.body.company.company_telephone !== ''
   ) {
-    const company_id = generateCompanyCode(uid.toString());
-    const companyCode = concatenateCompanyCode(company_id, 'W', '0');
-    req.body.member_information.company_code = companyCode;
+    const useQuery = `use ${process.env.MYSQL_DATABASE};`;
+
+    const checkCompanyQuery = `
+        SELECT * 
+        FROM company 
+        WHERE company_name = "${req.body.company.company_name}"
+        AND company_telephone = "${req.body.company.company_telephone}"
+        AND company_email = "${req.body.company.company_email}"
+        AND company_address = "${req.body.company.company_address}";
+    
+    `;
+
+    await pool.query(useQuery);
+    const [rows] = await pool.query(checkCompanyQuery);
+
+    if (rows[0]) {
+      console.log('company code: ', rows[0].company_code);
+      console.log(req.body);
+      req.body.company.company_code = rows[0].company_code;
+    } else {
+      const company_id = generateCompanyCode(uid.toString());
+      const companyCode = concatenateCompanyCode(company_id, 'W', '0');
+      req.body.member_information.company_code = companyCode;
+    }
   } else {
     req.body.member_information.company_code = null;
     req.body.member_information.work_title_or_position = null;
