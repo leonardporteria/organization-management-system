@@ -64,11 +64,10 @@ memberRouter.post('/member', async (req, res) => {
     const [rows] = await pool.query(checkCompanyQuery);
 
     if (rows[0]) {
-      console.log();
       console.log('company code: ', rows[0].company_code);
-      console.log(req.body);
       req.body.member_information.company_code = rows[0].company_code;
     } else {
+      console.log('new company code');
       const company_id = generateCompanyCode(uid.toString());
       const companyCode = concatenateCompanyCode(company_id, 'W', '0');
       req.body.member_information.company_code = companyCode;

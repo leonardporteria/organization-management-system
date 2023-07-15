@@ -222,6 +222,7 @@ const PersonalInformation = ({ onInputChange }) => {
           <p>Telephone Number</p>
           <input
             type='text'
+            defaultValue={'null'}
             onBlur={(e) => {
               handlePersonalData(e, 'telephone_number');
             }}
